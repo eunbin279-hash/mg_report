@@ -584,6 +584,10 @@ h4,
     font-size: 1.1rem;
     color: #444;
     word-break: keep-all;
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 10px;
+    align-items: start;
 }
 
 .role-definitions p:last-child {
@@ -593,8 +597,6 @@ h4,
 .role-definitions strong {
     color: var(--accent-color);
     font-size: 1.15rem;
-    display: inline-block;
-    width: 130px;
     font-weight: 800;
 }
 
@@ -616,7 +618,7 @@ h4,
 
 .subtitle {
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin-bottom: 3rem;
     color: #666;
 }
@@ -1155,26 +1157,55 @@ h4,
 
 /* Responsive */
 @media (max-width: 768px) {
+    .scene {
+        padding: 4rem 1rem;
+    }
+
+    .outro-scene {
+        padding: 4rem 1.5rem;
+    }
+
     .main-title {
         font-size: 3rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        word-break: keep-all;
+    }
+
+    /* 화면 가로폭이 768px 이하(모바일)일 때만 작동하는 코드 */
+
+    .warning-text {
+        font-size: 1rem;
+        /* 모바일에서는 작게 (예: 1rem) */
     }
 
     .character-intro-container {
         flex-direction: column;
         gap: 2rem;
+        align-items: center;
+        /* 캐릭터 가운데 정렬 */
     }
 
     .chat-container {
-        padding: 1.5rem;
+        padding: 1rem 0.8rem;
+    }
+
+    .chat-profile {
+        width: 45px;
+        height: 45px;
     }
 
     .chat-bubbles {
-        max-width: 85%;
+        max-width: 100%;
+        flex: 1;
     }
 
     .bubble {
         font-size: 1rem;
-        padding: 0.8rem 1.2rem;
+        padding: 0.8rem 1rem;
+        word-break: keep-all;
     }
 
     .char-full-img {
@@ -1184,10 +1215,22 @@ h4,
     .intro-cookie-container {
         width: 250px;
         height: 250px;
+        margin: 1rem auto;
+    }
+
+    .scroll-indicator {
+        bottom: 1rem;
+        font-size: 1rem;
     }
 
     .huge-text {
-        font-size: 2.5rem;
+        font-size: 1.8rem;
+        word-break: keep-all;
+    }
+
+    .center-title {
+        font-size: 1.8rem;
+        word-break: keep-all;
     }
 
     .guide-group {
@@ -1195,8 +1238,9 @@ h4,
     }
 
     .split-cookie-container {
-        width: 300px;
-        height: 300px;
+        width: 180px;
+        height: 180px;
+        margin: 2rem auto;
     }
 
     .line {
@@ -1204,21 +1248,121 @@ h4,
     }
 
     .label-box {
-        transform: scale(0.8);
+        transform: scale(0.6);
     }
 
     .box-1 {
-        top: 0;
-        right: -30%;
+        top: 20%;
+        left: -35%;
+        transform-origin: right center;
     }
 
     .box-2 {
-        bottom: 0;
-        left: 0;
+        top: -10%;
+        right: -30%;
+        transform-origin: left center;
     }
 
     .box-3 {
-        top: 0;
-        left: -30%;
+        bottom: -10%;
+        right: -30%;
+        transform-origin: left center;
+    }
+
+    .sub-text br {
+        display: none;
+    }
+
+    .sub-text {
+        font-size: 1.1rem;
+        word-break: keep-all;
+        padding: 0 1rem;
+    }
+
+    .card-container {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 1rem;
+        scroll-snap-type: x mandatory;
+    }
+
+    .contract-card {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
+        padding: 1.2rem;
+    }
+
+    .contract-title {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .contract-clauses p {
+        font-size: 0.85rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .contract-clauses strong {
+        font-size: 0.95rem;
+    }
+
+    .mg-explanation {
+        padding: 1rem;
+    }
+
+    .jp-style,
+    .kr-style {
+        padding: 1.2rem;
+    }
+
+    .comparison-board h3 {
+        font-size: 1.4rem;
+        word-break: keep-all;
+    }
+
+    .definition {
+        font-size: 1.05rem;
+    }
+
+    .tooltip-display {
+        display: none;
+        /* 모바일에서는 클릭 팝업으로 대체 */
+    }
+
+    .role-definitions {
+        padding: 1.5rem;
+    }
+
+    .role-definitions p {
+        grid-template-columns: 1fr;
+        gap: 0.2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .summary-box h3,
+    .authors-note h3 {
+        font-size: 1.5rem;
+    }
+
+    .summary-box ol {
+        font-size: 1.05rem;
+        margin-left: 1.2rem;
+    }
+
+    .authors-note p {
+        font-size: 1.05rem;
+        word-break: keep-all;
+    }
+
+    .credits {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+        align-items: center;
+    }
+
+    .credit-col p {
+        font-size: 0.85rem;
     }
 }

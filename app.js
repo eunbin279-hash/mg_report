@@ -321,6 +321,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 tooltipDisplay.style.fontWeight = '400';
                 e.target.classList.remove('active-highlight');
             });
+
+            keyword.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.stopPropagation();
+                    const desc = e.target.getAttribute('data-desc');
+                    if (!desc) return;
+                    showInlineTooltip(e.target, desc, e.target.innerText);
+                }
+            });
         });
     }
 
@@ -328,41 +337,43 @@ document.addEventListener('DOMContentLoaded', () => {
     bindTooltips(initialToxicKeywords);
 
     let currentInlineTooltip = null;
+    function showInlineTooltip(element, desc, title) {
+        if (currentInlineTooltip) {
+            currentInlineTooltip.remove();
+        }
+
+        const tooltip = document.createElement('div');
+        tooltip.classList.add('inline-tooltip');
+
+        if (title) {
+            tooltip.innerHTML = `<strong style="color: var(--accent-color); display: block; margin-bottom: 5px; font-size: 1.1rem;">${title}</strong>${desc}`;
+        } else {
+            tooltip.innerText = desc;
+        }
+
+        document.body.appendChild(tooltip);
+
+        const rect = element.getBoundingClientRect();
+        tooltip.style.left = `${rect.left + window.scrollX + (rect.width / 2)}px`;
+        tooltip.style.top = `${rect.bottom + window.scrollY + 10}px`;
+
+        requestAnimationFrame(() => {
+            tooltip.classList.add('show');
+        });
+
+        currentInlineTooltip = tooltip;
+    }
+
     function bindContractHighlights(container) {
         const keywords = container.querySelectorAll('.pulse-hl');
 
         keywords.forEach(keyword => {
             keyword.addEventListener('click', (e) => {
                 e.stopPropagation();
-
-                if (currentInlineTooltip) {
-                    currentInlineTooltip.remove();
-                }
-
                 const desc = e.target.getAttribute('data-desc');
                 if (!desc) return;
-
-                const tooltip = document.createElement('div');
-                tooltip.classList.add('inline-tooltip');
-
                 const title = e.target.getAttribute('data-title');
-                if (title) {
-                    tooltip.innerHTML = `<strong style="color: var(--accent-color); display: block; margin-bottom: 5px; font-size: 1.1rem;">${title}</strong>${desc}`;
-                } else {
-                    tooltip.innerText = desc;
-                }
-
-                document.body.appendChild(tooltip);
-
-                const rect = e.target.getBoundingClientRect();
-                tooltip.style.left = `${rect.left + window.scrollX + (rect.width / 2)}px`;
-                tooltip.style.top = `${rect.bottom + window.scrollY + 10}px`;
-
-                requestAnimationFrame(() => {
-                    tooltip.classList.add('show');
-                });
-
-                currentInlineTooltip = tooltip;
+                showInlineTooltip(e.target, desc, title);
             });
         });
     }
@@ -392,4 +403,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.3 });
 
     scene7Observer.observe(scene7);
+
+    // Auto scroll for contracts on mobile (Scene 6)
+    const scene6 = document.getElementById('scene-6');
+    const cardContainer = document.querySelector('.card-container');
+    let hasAutoScrolled = false;
+    
+    if (scene6 && cardContainer) {
+        const scene6Observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && window.innerWidth <= 768 && !hasAutoScrolled) {
+                hasAutoScrolled = true;
+                setTimeout(() => {
+                    const secondCard = cardContainer.querySelectorAll('.contract-card')[1];
+                    if (secondCard) {
+                        const scrollPos = secondCard.offsetLeft - cardContainer.offsetLeft - 15;
+                        cardContainer.scrollTo({
+                            left: scrollPos,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 3000);
+            }
+        }, { threshold: 0.5 });
+        scene6Observer.observe(scene6);
+    }
 });
