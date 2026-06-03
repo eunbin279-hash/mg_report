@@ -2,15 +2,17 @@
 
 @font-face {
     font-family: 'BelovedMyoeunttobak';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2601-1@1.0/Griun_Myoeunddobak-Rg.woff2') format('woff2');
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2601-1@1.0/Griun_Myoeunddobak-Rg.woff2') format('woff2');
     font-weight: normal;
+    font-style: normal;
     font-display: swap;
 }
 
 @font-face {
     font-family: 'NostalgicKiteDrifting';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2604-1@1.0/Griun_InaDoongdoong-Rg.woff2') format('woff2');
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2604-1@1.0/Griun_InaDoongdoong-Rg.woff2') format('woff2');
     font-weight: normal;
+    font-style: normal;
     font-display: swap;
 }
 
@@ -189,10 +191,12 @@ h1, h2, h3, h4, .main-title, .section-title, .center-title, .huge-text {
 }
 
 .char-full-img {
+    width: 100%;
     height: 250px;
     object-fit: contain;
     margin-bottom: 1.5rem;
     filter: drop-shadow(0 10px 15px rgba(0,0,0,0.05));
+    display: block;
 }
 
 .char-info {
@@ -242,6 +246,7 @@ h1, h2, h3, h4, .main-title, .section-title, .center-title, .huge-text {
 .chat-profile {
     width: 60px;
     height: 60px;
+    flex-shrink: 0;
     border-radius: 50%;
     object-fit: cover;
     background: white;
