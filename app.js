@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     /* --- Chat Animation (All Scenes) --- */
     const chatContainers = document.querySelectorAll('.chat-container');
     const chatObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const container = entry.target;
-                
+
                 // Animate characters if they exist in this container's parent section
                 const section = container.closest('section');
                 const characters = section ? section.querySelectorAll('.character:not(.visible)') : [];
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 let messageDelay = characters.length > 0 ? 1000 : 200;
-                
+
                 const chatMessages = container.querySelectorAll('.chat-message:not(.visible)');
                 chatMessages.forEach((msg) => {
                     setTimeout(() => {
@@ -29,11 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             }, bIndex * 600);
                         });
                     }, messageDelay);
-                    
+
                     const bubbleCount = msg.querySelectorAll('.bubble:not(.visible)').length;
                     messageDelay += (bubbleCount * 600) + 400;
                 });
-                
+
                 if (container.id === 'contract-intro-chat') {
                     setTimeout(() => {
                         const hlCard = document.querySelector('#scene-7 .highlight-card');
@@ -43,6 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
                                 hl.style.transitionDelay = `${index * 1.5}s`;
                             });
                             hlCard.classList.add('show-highlights');
+
+                            const guideText = document.getElementById('click-guide-text');
+                            if (guideText) {
+                                setTimeout(() => {
+                                    guideText.classList.add('visible');
+                                }, highlights.length * 1500); // 하이라이트 애니메이션이 끝나갈 때쯤 표시
+                            }
                         }
                     }, messageDelay + 200);
                 }
@@ -59,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const createFloatingElement = () => {
         const el = document.createElement('div');
         el.classList.add('floating-item');
-        
+
         // Randomize between cookie image and text number
         if (Math.random() > 0.5) {
             const img = document.createElement('img');
@@ -81,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Random starting position
         el.style.left = `${Math.random() * 100}vw`;
-        
+
         // Random animation duration and delay
         const duration = Math.random() * 5 + 5; // 5s to 10s
         el.style.animationDuration = `${duration}s`;
@@ -98,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Initialize initial floating elements
-    for(let i=0; i<15; i++) {
+    for (let i = 0; i < 15; i++) {
         createFloatingElement();
     }
     // Continuously create them
@@ -212,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="parties">갑: C 플랫폼<br>을: 신인 작가</span>
                 </div>
                 <div class="card-body contract-clauses">
-                    <p><strong>제 3조 (수익 정산)</strong><br>작품에서 발생하는 순수익은 "갑"과 "을"이 <span class="toxic-keyword pulse-hl" data-title="RS (수익 배분)" data-desc="발생한 수익을 약정된 비율로 분배하는 안전한 정산 방식입니다.">3:7의 비율로 분배한다.</span></p>
+                    <p><strong>제 3조 (수익 정산)</strong><br>작품에서 발생하는 순수익은 "갑"과 "을"이 <span class="toxic-keyword pulse-hl" data-title="RS (수익 배분)" data-desc="발생한 수익을 약정된 비율로 분배하는 정산 방식입니다.">3:7의 비율로 분배한다.</span></p>
                     <p><strong>제 4조 (최소 수익 보장)</strong><br>본 계약은 <span class="toxic-keyword pulse-hl" data-title="MG 없음" data-desc="선지급되는 가불금이 없으므로 빚은 안 생기지만, 당장의 수입 보장이 안 되어 생계가 불안정할 수 있습니다.">별도의 최소 보장금(MG)을 선지급하지 아니하며</span>, 실제 발생한 수익만을 기준으로 배분한다.</p>
                 </div>
             </div>
@@ -227,10 +234,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             document.querySelectorAll('.contract-card').forEach(c => c.classList.remove('selected'));
             cardElement.classList.add('selected');
-            
+
             modalTitle.innerText = data.title;
             modalDesc.innerText = data.desc;
-            if(modalCalc) modalCalc.innerHTML = data.calcHTML;
+            if (modalCalc) modalCalc.innerHTML = data.calcHTML;
             debtCounter.innerText = '0원';
             modal.classList.add('active');
 
@@ -244,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let current = 0;
             const target = data.profit;
             const step = target / 50; // 50 frames
-            
+
             if (target !== 0) {
                 counterInterval = setInterval(() => {
                     current += step;
@@ -265,14 +272,19 @@ document.addEventListener('DOMContentLoaded', () => {
     closeBtn.addEventListener('click', () => {
         modal.classList.remove('active');
         if (counterInterval) clearInterval(counterInterval);
-        
+
         const scene7 = document.getElementById('scene-7');
         if (scene7) {
             scene7.scrollIntoView({ behavior: 'smooth' });
-            
+
             const hlCard = document.querySelector('#scene-7 .highlight-card');
             if (hlCard) {
                 hlCard.classList.remove('show-highlights');
+            }
+
+            const guideText = document.getElementById('click-guide-text');
+            if (guideText) {
+                guideText.classList.remove('visible');
             }
 
             const contractChat = document.getElementById('contract-intro-chat');
@@ -294,7 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.forEach(keyword => {
             keyword.addEventListener('mouseenter', (e) => {
                 const desc = e.target.getAttribute('data-desc');
-                if(!desc) return;
+                if (!desc) return;
                 tooltipDisplay.innerText = desc;
                 tooltipDisplay.style.backgroundColor = '#FFEAEA';
                 tooltipDisplay.style.color = 'var(--warning-color)';
@@ -318,21 +330,21 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentInlineTooltip = null;
     function bindContractHighlights(container) {
         const keywords = container.querySelectorAll('.pulse-hl');
-        
+
         keywords.forEach(keyword => {
             keyword.addEventListener('click', (e) => {
                 e.stopPropagation();
-                
+
                 if (currentInlineTooltip) {
                     currentInlineTooltip.remove();
                 }
 
                 const desc = e.target.getAttribute('data-desc');
-                if(!desc) return;
+                if (!desc) return;
 
                 const tooltip = document.createElement('div');
                 tooltip.classList.add('inline-tooltip');
-                
+
                 const title = e.target.getAttribute('data-title');
                 if (title) {
                     tooltip.innerHTML = `<strong style="color: var(--accent-color); display: block; margin-bottom: 5px; font-size: 1.1rem;">${title}</strong>${desc}`;
@@ -341,15 +353,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 document.body.appendChild(tooltip);
-                
+
                 const rect = e.target.getBoundingClientRect();
                 tooltip.style.left = `${rect.left + window.scrollX + (rect.width / 2)}px`;
                 tooltip.style.top = `${rect.bottom + window.scrollY + 10}px`;
-                
+
                 requestAnimationFrame(() => {
                     tooltip.classList.add('show');
                 });
-                
+
                 currentInlineTooltip = tooltip;
             });
         });
@@ -365,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Auto highlight using IntersectionObserver for Scene 7
     const scene7 = document.getElementById('scene-7');
     const scene7Observer = new IntersectionObserver((entries) => {
-        if(entries[0].isIntersecting) {
+        if (entries[0].isIntersecting) {
             let delay = 500;
             const currentKeywords = document.querySelectorAll('.guide-group .toxic-keyword');
             currentKeywords.forEach((k) => {
@@ -378,6 +390,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }
     }, { threshold: 0.3 });
-    
+
     scene7Observer.observe(scene7);
 });
