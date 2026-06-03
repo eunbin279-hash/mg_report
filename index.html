@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>웹툰 MG 제도 리포트 - 그 많은 쿠키는 다 누가 먹었을까?</title>
+    <title>웹툰작가는 1년에 얼마 벌까? - 그 많은 쿠키는 다 누가 먹었을까?</title>
     <meta name="description" content="웹툰 작가들의 수익 구조와 MG 제도의 실체를 파헤치는 인터랙티브 저널입니다.">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <!-- Scene 1 -->
     <section id="scene-1" class="scene">
         <div class="content-wrapper">
-            <h1 class="main-title">그 많은 쿠키는<br>다 누가 먹었을까?</h1>
+            <h1 class="main-title">웹툰작가는 1년에 얼마 벌까?</h1>
             <div class="cookie-container intro-cookie-container">
                 <img src="assets/cookie.png" alt="대형 쿠키" class="cookie-img intro-cookie">
             </div>
@@ -21,23 +24,56 @@
     </section>
 
     <!-- Scene 2 -->
-    <section id="scene-2" class="scene">
-        <div class="content-wrapper split-layout">
-            <div class="left-panel data-panel">
-                <div class="data-card">
-                    <h2 class="section-title">연 매출 <span class="highlight">1조 5천억 원</span>의<br>웹툰 시장</h2>
-                    <div class="data-text">
-                        <p>한국 웹툰 산업은 매년 눈부신 성장을 거듭하며 거대한 시장을 형성하고 있습니다. 해외 수출액도 매년 최고치를 경신하며 황금기를 누리고 있죠.</p>
-                        <p class="highlight-data">하지만...</p>
+    <section id="scene-2" class="scene chat-scene">
+        <div class="content-wrapper">
+
+            <div class="character-intro-container">
+                <div class="character student">
+                    <img src="assets/student_character.png" alt="학생 전신" class="char-full-img">
+                    <div class="char-info">
+                        <h3>학생</h3>
+                        <p>웹툰을 사랑하는 열혈 독자</p>
+                    </div>
+                </div>
+                <div class="character pro">
+                    <img src="assets/pro_character.png" alt="프로 작가 전신" class="char-full-img">
+                    <div class="char-info">
+                        <h3>프로 작가</h3>
+                        <p>현실의 벽에 부딪힌 웹툰 작가</p>
                     </div>
                 </div>
             </div>
-            <div class="right-panel">
-                <div class="speech-bubble">
-                    <p>"플랫폼 매출은 역대급이라는데,<br>내 통장은 왜 마이너스일까?"</p>
-                    <span class="author-label">- 3년차 웹툰 작가 A씨</span>
+
+            <div class="chat-container">
+                <!-- 학생 1 -->
+                <div class="chat-message student-msg">
+                    <img src="assets/student_face.png" alt="학생 얼굴" class="chat-profile">
+                    <div class="chat-bubbles">
+                        <div class="bubble">작가님! 이번 뉴스 보셨어요? 한국 웹툰이 전 세계를 휩쓸어서 시장 규모가 무려 1조원이 넘는대요!</div>
+                        <div class="bubble">1조 8,290억 원이면… 제가 죽을 때까지 매일 6000만원씩 써야 다 쓰는 돈이라구요.</div>
+                        <div class="bubble">웹툰작가들은 1년에 막 몇 억씩 번다던데, 작가님도 그런 거죠?!</div>
+                    </div>
+                </div>
+
+                <!-- 프로 1 -->
+                <div class="chat-message pro-msg">
+                    <img src="assets/pro_face.png" alt="프로 얼굴" class="chat-profile">
+                    <div class="chat-bubbles">
+                        <div class="bubble">평균 연봉이 5,000만원에서 8,000만원…</div>
+                        <div class="bubble">평균이라는 말에 속지 마.</div>
+                        <div class="bubble">웹툰 작가 과반수 이상은 연에 3000도 못 받는다. 최저시급도 못 받는다고.</div>
+                    </div>
+                </div>
+
+                <!-- 학생 2 -->
+                <div class="chat-message student-msg">
+                    <img src="assets/student_face.png" alt="학생 얼굴" class="chat-profile">
+                    <div class="chat-bubbles">
+                        <div class="bubble">네?? 작가님 작품 드라마화도 되고 제가 매주 쿠키도 결제하는데도요?!</div>
+                    </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -84,36 +120,51 @@
     <!-- Scene 6 -->
     <section id="scene-6" class="scene">
         <div class="content-wrapper">
-            <h2 class="section-title center-text">당신은 계약을 앞둔 신인작가이다.</h2>
+            <h2 class="section-title center-text">계약을 앞둔 신인 작가가 되어 보자</h2>
             <p class="subtitle">어떤 플랫폼과 계약하시겠습니까?</p>
-            
+
             <div class="card-container">
                 <div class="contract-card" data-platform="A">
-                    <h3>A 플랫폼</h3>
-                    <div class="card-body">
-                        <p class="offer">월 200만원 보장</p>
-                        <hr>
-                        <p class="small-text condition">누적 차감 / 후차감</p>
+                    <div class="contract-header">
+                        <h3 class="contract-title">웹툰 연재 계약서</h3>
+                        <span class="parties">갑: A 플랫폼<br>을: 신인 작가</span>
                     </div>
-                    <button class="select-btn">도장 찍기</button>
+                    <div class="card-body contract-clauses">
+                        <p><strong>제 3조 (최소 보장금)</strong><br>"갑"은 "을"에게 매월 4,000,000원을 수익으로 선지급하여 보장한다.</p>
+                        <p><strong>제 5조 (수익 분배 및 정산)</strong><br>매출 발생 시 플랫폼 수수료를 공제한 금액을 "을"의 수익으로 산정한다. "을"의 분배 수익이 기
+                            지급된 보장금에 미달할 경우, 그 미달 금액은 익월로 이월되어 누적 상환한다.</p>
+                    </div>
+                    <div class="stamp-area">
+                        <button class="select-btn stamp-btn">서명<br>날인</button>
+                    </div>
                 </div>
                 <div class="contract-card" data-platform="B">
-                    <h3>B 플랫폼</h3>
-                    <div class="card-body">
-                        <p class="offer">월 300만원 보장</p>
-                        <hr>
-                        <p class="small-text condition">누적 차감 / 선차감</p>
+                    <div class="contract-header">
+                        <h3 class="contract-title">콘텐츠 제공 계약서</h3>
+                        <span class="parties">갑: B 플랫폼<br>을: 신인 작가</span>
                     </div>
-                    <button class="select-btn">도장 찍기</button>
+                    <div class="card-body contract-clauses">
+                        <p><strong>제 4조 (수익 배분)</strong><br>"갑"은 "을"에게 매월 2,000,000원의 최소 보장금을 지급한다.</p>
+                        <p><strong>제 6조 (정산 방식)</strong><br>매출 발생 시 기 지급된 보장금을 최우선으로 공제하며, 상환 후 남은 수익을 "갑"과 "을"이 분배한다.
+                            미상환 보장금은 작품 완결 시까지 지속 누적된다.</p>
+                    </div>
+                    <div class="stamp-area">
+                        <button class="select-btn stamp-btn">서명<br>날인</button>
+                    </div>
                 </div>
                 <div class="contract-card" data-platform="C">
-                    <h3>C 플랫폼</h3>
-                    <div class="card-body">
-                        <p class="offer">수익 분배 7:3</p>
-                        <hr>
-                        <p class="small-text condition">MG 없음</p>
+                    <div class="contract-header">
+                        <h3 class="contract-title">독점 연재 합의서</h3>
+                        <span class="parties">갑: C 플랫폼<br>을: 신인 작가</span>
                     </div>
-                    <button class="select-btn">도장 찍기</button>
+                    <div class="card-body contract-clauses">
+                        <p><strong>제 3조 (수익 정산)</strong><br>작품에서 발생하는 순수익은 "갑"과 "을"이 3:7의 비율로 분배한다.</p>
+                        <p><strong>제 4조 (최소 수익 보장)</strong><br>본 계약은 별도의 최소 보장금(MG)을 지급하지 아니하며, 실제 발생한 수익만을 기준으로 배분한다.
+                        </p>
+                    </div>
+                    <div class="stamp-area">
+                        <button class="select-btn stamp-btn">서명<br>날인</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -123,6 +174,7 @@
             <div class="modal-content warning-anim">
                 <span class="close-btn">&times;</span>
                 <h3 id="modal-title" class="alert-title"></h3>
+                <div class="calculation-box" id="modal-calc"></div>
                 <p id="modal-desc"></p>
                 <div class="debt-counter" id="debt-counter"></div>
             </div>
@@ -134,27 +186,89 @@
         <div class="content-wrapper">
             <h2 class="section-title">MG(Minimum Guarantee) 제도의 실체</h2>
             <div class="mg-explanation">
-                <p class="definition"><strong>MG(최소 보장금)</strong>란, 작가에게 매월 최소한의 수익을 보장해 주는 대신, 이후 발생한 수익에서 그 금액을 차감하는 제도입니다. 언뜻 안전망 같지만 독소 조항이 숨어있습니다.</p>
-                
+                <!-- 첫 번째 대화 -->
+                <div class="chat-container scene7-chat">
+                    <div class="chat-message student-msg">
+                        <img src="assets/student_face.png" alt="학생 얼굴" class="chat-profile">
+                        <div class="chat-bubbles">
+                            <div class="bubble">작가님, 그럼 작가님들은 만화를 그리면 원고료를 받는 거 아니에요? 회사원들 월급처럼요!</div>
+                        </div>
+                    </div>
+                    <div class="chat-message pro-msg">
+                        <img src="assets/pro_face.png" alt="프로 얼굴" class="chat-profile">
+                        <div class="chat-bubbles">
+                            <div class="bubble">일본 같은 곳은 원고료를 받는 게 맞는데, 한국 웹툰은 좀 달라. 우리는 보통 'MG'라는 걸 받아.</div>
+                            <div class="bubble">진짜 내 돈이 아니라 가불금 같은 거지.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-board">
+                    <div class="jp-style">
+                        <h3>만화 업계 표준 방식(일본)</h3>
+                        <p class="definition"><strong>원고료:</strong> 만화를 그린 대가로 받는 진짜 자기 돈이다. 일본 만화계의 기본 정산 방식.</p>
+                    </div>
+                    <div class="kr-style">
+                        <h3>현재 한국 웹툰 업계 정산 방식</h3>
+                        <p class="definition"><strong>MG(Minimum Guarantee, 최소보장금):</strong> 나중에 독자가 낼 유료 회차 값을 회사에서 미리
+                            당겨 쓰는 '가짜 월급(가불금)'이다.</p>
+                        <p class="definition"><strong>RS(Revenue Share, 수익 배분):</strong> 네이버나 카카오 같은 플랫폼이 수수료를 떼고 남은 알맹이
+                            돈을 회사(에이전시)와 작가가 나누는 비율이다.</p>
+                        <p class="definition"><strong>리쿠프(Recoup, 차감):</strong> 만화가 돈을 벌었을 때, 미리 받았던 가불금(MG)만큼을 먼저 채워
+                            넣어야 하는 보이지 않는 저금통.</p>
+                    </div>
+                </div>
+
+                <!-- 두 번째 대화 -->
+                <div id="contract-intro-chat" class="chat-container scene7-chat">
+                    <div class="chat-message student-msg">
+                        <img src="assets/student_face.png" alt="학생 얼굴" class="chat-profile">
+                        <div class="chat-bubbles">
+                            <div class="bubble">아, 미리 받는 거면 좋은 거 아니에요? 어차피 받을 돈 당겨 받는 거잖아요!</div>
+                        </div>
+                    </div>
+                    <div class="chat-message pro-msg">
+                        <img src="assets/pro_face.png" alt="프로 얼굴" class="chat-profile">
+                        <div class="chat-bubbles">
+                            <div class="bubble">그렇게 단순하지가 않아.</div>
+                            <div class="bubble">이 MG를 어떻게 갚아야 하는지, 수익은 어떻게 나누는지에 따라 완전히 빚쟁이가 되기도 하거든.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 선택된 계약서 다시 보기 영역 -->
+                <div id="selected-contract-display" class="selected-contract-display">
+                    <!-- 스크립트에서 주입됨 -->
+                </div>
+
                 <div class="guide-group">
                     <div class="guide-item">
                         <h4>MG 종류</h4>
                         <ul class="keyword-list">
-                            <li>월 MG</li>
-                            <li class="toxic-keyword" data-desc="수익이 나지 않은 달의 마이너스가 다음 달로 이월되어 빚처럼 쌓입니다.">누적 MG</li>
-                            <li>통합 MG</li>
-                            <li>시즌 MG</li>
+                            <li class="toxic-keyword"
+                                data-desc="매달 MG를 먼저 지급받고 수익으로 그 MG를 갚는다. 이번 달에 MG를 다 못 채워도 다음 달에 빚이 쌓이지 않는다.">월 MG</li>
+                            <li class="toxic-keyword" data-desc="이번 달에 못 갚은 MG가 다음 달로 넘어가서, 빚을 다 청산하기 전까지 수익이 나지 않는다.">
+                                누적 MG</li>
+                            <li class="toxic-keyword" data-desc="한국, 해외, 혹은 다른 작품 매출까지 전부 하나로 합쳐서 MG를 갚게 만드는 방식이다.">통합
+                                MG</li>
+                            <li class="toxic-keyword"
+                                data-desc="한 시즌(예: 50화) 분량의 돈을 한 번에 통째로 묶어 주는 방식이다. 휴재하거나 마감이 늦어지면 작가가 손해를 감수해야한다.">시즌
+                                MG</li>
                         </ul>
                     </div>
                     <div class="guide-item">
                         <h4>차감 종류</h4>
                         <ul class="keyword-list">
-                            <li>선차감</li>
-                            <li class="toxic-keyword" data-desc="플랫폼 수수료를 먼저 뗀 후, 작가 수익에서 MG를 차감합니다. 작가에게 매우 불리한 구조입니다.">후차감</li>
+                            <li class="toxic-keyword" data-desc="전체 매출에서 MG를 먼저 갚고 남은 돈을 나눈다.">선차감</li>
+                            <li class="toxic-keyword" data-desc="전체 매출을 회사와 먼저 나눈 뒤, '작가 몫'에서만 MG를 차감한다.">후차감</li>
                         </ul>
                     </div>
                 </div>
                 <div class="tooltip-display" id="tooltip-display">마우스를 올려 확인해보세요.</div>
+
+                <div class="warning-text">
+                    주 70~80시간씩 일하고 어시스턴트 비용까지 지출하고 나면, 실질 체감 시급은 최저시급 이하로 떨어집니다.
+                </div>
             </div>
         </div>
     </section>
@@ -170,17 +284,18 @@
                     <li>건강한 창작 환경과 불공정 계약 관행 개선을 위한 관심이 필요하다.</li>
                 </ol>
             </div>
-            
+
             <div class="authors-note">
                 <h3>작가의 말</h3>
-                <p>화려한 웹툰 시장 이면에서 고군분투하는 작가들의 현실을 알리고자 이 인터랙티브 저널을 기획했습니다. 창작자들이 정당한 대우를 받는 생태계를 위해 독자 여러분의 지속적인 관심 부탁드립니다.</p>
+                <p>화려한 웹툰 시장 이면에서 고군분투하는 작가들의 현실을 알리고자 이 인터랙티브 저널을 기획했습니다. 창작자들이 정당한 대우를 받는 생태계를 위해 독자 여러분의 지속적인 관심
+                    부탁드립니다.</p>
             </div>
         </div>
 
         <footer class="credits">
             <div class="credit-col">
                 <h4>제작</h4>
-                <p>인터랙티브 저널 팀</p>
+                <p>노은빈</p>
             </div>
             <div class="credit-col">
                 <h4>자료 출처</h4>
@@ -192,4 +307,5 @@
 
     <script src="app.js"></script>
 </body>
+
 </html>
