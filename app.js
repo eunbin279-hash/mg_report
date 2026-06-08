@@ -1,5 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Start Scene 1 Intro animation on load
+    const scene1 = document.getElementById('scene-1');
+    if (scene1) {
+        setTimeout(() => {
+            scene1.classList.add('active');
+        }, 150);
+    }
+
+    /* --- Character Intro Animation (Scene 2) --- */
+    const charIntroContainer = document.querySelector('.character-intro-container');
+    if (charIntroContainer) {
+        const charIntroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const characters = charIntroContainer.querySelectorAll('.character:not(.visible)');
+                    characters.forEach((char, index) => {
+                        setTimeout(() => {
+                            char.classList.add('visible');
+                        }, index * 400);
+                    });
+                    charIntroObserver.unobserve(charIntroContainer);
+                }
+            });
+        }, { threshold: 0.1 });
+        charIntroObserver.observe(charIntroContainer);
+    }
+
     /* --- Chat Animation (All Scenes) --- */
     const chatContainers = document.querySelectorAll('.chat-container');
     const chatObserver = new IntersectionObserver((entries) => {
@@ -7,16 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (entry.isIntersecting) {
                 const container = entry.target;
 
-                // Animate characters if they exist in this container's parent section
-                const section = container.closest('section');
-                const characters = section ? section.querySelectorAll('.character:not(.visible)') : [];
-                characters.forEach((char, index) => {
-                    setTimeout(() => {
-                        char.classList.add('visible');
-                    }, index * 400);
-                });
-
-                let messageDelay = characters.length > 0 ? 1000 : 200;
+                let messageDelay = 200;
 
                 const chatMessages = container.querySelectorAll('.chat-message:not(.visible)');
                 chatMessages.forEach((msg) => {
@@ -57,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 chatObserver.unobserve(container);
             }
         });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.15 });
 
     chatContainers.forEach(container => chatObserver.observe(container));
 
@@ -113,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* --- Scene 4: Scroll Animation (Split Cookie) --- */
+    const scene4 = document.getElementById('scene-4');
     const splitContainer = document.getElementById('split-cookie-container');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -121,15 +140,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     splitContainer.classList.add('split-active');
                 }, 500);
-                // observer.unobserve(entry.target); // Unobserve if you want it to happen only once
             } else {
                 // Remove class when out of view to re-trigger animation when scrolling back
                 splitContainer.classList.remove('split-active');
             }
         });
-    }, { threshold: 0.6 });
+    }, { threshold: 0.15 });
 
-    observer.observe(splitContainer);
+    observer.observe(scene4);
 
 
     /* --- Scene 6: Contract Simulation Game --- */
@@ -427,4 +445,151 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { threshold: 0.5 });
         scene6Observer.observe(scene6);
     }
+
+    // Outro Campaign Interactive Accordion Toggle
+    const outroKeywordItems = document.querySelectorAll('.outro-campaign .keyword-item');
+    outroKeywordItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            // Do not toggle if helper button links are clicked
+            if (e.target.closest('.helper-btn')) return;
+            
+            const isActive = item.classList.contains('active');
+            
+            // Close other active accordions to keep layout clean
+            outroKeywordItems.forEach(otherItem => {
+                otherItem.classList.remove('active');
+            });
+            
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+
+    /* --- Statistical Graphic Animations (Scene 5, 7, 8) --- */
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+                
+                // Add fade-in active class
+                target.classList.add('animate-active');
+                
+                // 1. Scene 5 Multi Bar Chart Animation
+                const segments = target.querySelectorAll('.chart-segment, .sub-segment');
+                segments.forEach(seg => {
+                    const widthVal = seg.getAttribute('data-width');
+                    if (widthVal) {
+                        // Delay sub-segments slightly for layered feel
+                        const delay = seg.classList.contains('sub-segment') ? 600 : 100;
+                        setTimeout(() => {
+                            seg.style.width = `${widthVal}%`;
+                        }, delay);
+                    }
+                });
+
+                // 1-2. Scene 4 Partner Ratio Bar Animation
+                const partnerSegments = target.querySelectorAll('.partner-segment');
+                partnerSegments.forEach(seg => {
+                    const widthVal = seg.getAttribute('data-width');
+                    if (widthVal) {
+                        setTimeout(() => {
+                            seg.style.width = `${widthVal}%`;
+                        }, 4400);
+                    }
+                });
+
+                // 2. Scene 7 Split Ratio Bar Animation
+                const ratioSegments = target.querySelectorAll('.ratio-segment');
+                ratioSegments.forEach(seg => {
+                    const widthVal = seg.getAttribute('data-width');
+                    if (widthVal) {
+                        setTimeout(() => {
+                            seg.style.width = `${widthVal}%`;
+                        }, 200);
+                    }
+                });
+
+                // 3. Scene 8 Abuse Dashboard Animations (Bars + CountUp)
+                const abuseFills = target.querySelectorAll('.abuse-bar-fill');
+                abuseFills.forEach(fill => {
+                    const widthVal = fill.getAttribute('data-width');
+                    if (widthVal) {
+                        setTimeout(() => {
+                            fill.style.width = `${widthVal}%`;
+                        }, 300);
+                    }
+                });
+
+                const countNumbers = target.querySelectorAll('.dash-num');
+                countNumbers.forEach(numEl => {
+                    const targetVal = parseFloat(numEl.getAttribute('data-target'));
+                    if (!isNaN(targetVal)) {
+                        animateCountUp(numEl, targetVal);
+                    }
+                });
+
+                // Unobserve once animated
+                statsObserver.unobserve(target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    // Helper function for float count-up
+    function animateCountUp(element, target) {
+        let current = 0;
+        const duration = 1500; // 1.5s animation
+        const frameRate = 1000 / 60; // 60fps
+        const totalFrames = Math.round(duration / frameRate);
+        const increment = target / totalFrames;
+        let frame = 0;
+
+        const timer = setInterval(() => {
+            frame++;
+            current += increment;
+            if (frame >= totalFrames) {
+                current = target;
+                clearInterval(timer);
+            }
+            element.innerText = `${current.toFixed(1)}%`;
+        }, frameRate);
+    }
+
+    // Contact popup logic for Scene 1
+    const shareMailBtn = document.getElementById('share-mail-btn');
+    const contactPopup = document.getElementById('contact-popup');
+    const contactPopupClose = document.getElementById('contact-popup-close');
+
+    if (shareMailBtn && contactPopup) {
+        shareMailBtn.addEventListener('click', () => {
+            contactPopup.classList.add('active');
+        });
+    }
+
+    if (contactPopupClose && contactPopup) {
+        contactPopupClose.addEventListener('click', () => {
+            contactPopup.classList.remove('active');
+        });
+
+        contactPopup.addEventListener('click', (e) => {
+            if (e.target === contactPopup) {
+                contactPopup.classList.remove('active');
+            }
+        });
+    }
+
+    const shareTxtBtn = document.getElementById('share-txt-btn');
+    if (shareTxtBtn) {
+        shareTxtBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('링크가 클립보드에 복사되었습니다! 원하는 곳에 붙여넣어 공유해 보세요.');
+            }).catch(err => {
+                alert('링크 복사에 실패했습니다. 주소창의 URL을 직접 복사해 주세요.');
+            });
+        });
+    }
+
+    // Register all elements to observe
+    const animatedElements = document.querySelectorAll('.init-fade-in, .split-ratio-bar-wrapper, .contract-partner-stats');
+    animatedElements.forEach(el => statsObserver.observe(el));
 });
