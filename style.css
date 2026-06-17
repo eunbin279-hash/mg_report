@@ -1392,17 +1392,17 @@ h4,
 
 .campaign-box {
     flex: 1;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.45);
     border-radius: 16px;
     padding: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.10);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .campaign-box:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 138, 0, 0.3);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 138, 0, 0.45);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
 }
 
 .campaign-title {
@@ -1419,10 +1419,10 @@ h4,
 }
 
 .keyword-item {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.25);
     border-radius: 12px;
     padding: 1.2rem;
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     overflow: hidden;
@@ -1432,7 +1432,7 @@ h4,
 .keyword-item:hover, 
 .keyword-item.active,
 .keyword-item:focus-within {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.45);
     border-color: rgba(255, 255, 255, 0.15);
 }
 
