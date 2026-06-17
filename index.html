@@ -339,73 +339,6 @@
                             <div class="bubble">진짜 내 돈이 아니라 가불금 같은 거지.</div>
                         </div>
                     </div>
-                </div>
-
-                <div class="comparison-board">
-                    <div class="jp-style">
-                        <h3>만화 업계 표준 방식</h3>
-                        <p class="definition"><strong>원고료:</strong> 만화를 그린 대가로 받는 돈이다. 만화계의 기본 정산 방식.</p>
-                    </div>
-                    <div class="kr-style">
-                        <h3>현재 한국 웹툰 업계 정산 방식</h3>
-                        <p class="definition"><strong>MG(Minimum Guarantee, 최소보장금):</strong> 나중에 독자가 낼 유료 회차 값을 회사에서 미리
-                            당겨 쓰는 '가짜 월급(가불금)'이다.</p>
-                        <p class="definition"><strong>RS(Revenue Share, 수익 배분):</strong>
-                            플랫폼이나 에이전시와 작가가 수익을 배분하는 비율이다. <br>(예시: RS 40 = 작가가 유료 수익 중 40%를 가져감)</p>
-                        <p class="definition"><strong>리쿠프(Recoup, 차감):</strong> 만화가 돈을 벌었을 때, 미리 받았던 가불금(MG)만큼을 먼저 채워
-                            넣어야 하는 보이지 않는 저금통.</p>
-                    </div>
-                </div>
-
-                <!-- 출처: 2025 웹툰산업 실태조사_일반배포용.pdf 232페이지 (2) 대가 지급 방식), 234페이지 (4) 수익분배비율), 254페이지 (2) 계약 시, 계약 조건 결정 방식) -->
-                <div class="statistics-container init-fade-in">
-                    <p class="stat-main-desc">
-                        실제 시장의 대가지급방식은 순수 원고료 계약(41.3%)보다 월MG(35.5%) 및 누적MG(20.2%)를 활용하는 'MG 기반 계약'이 총 55.7%로 과반을 차지합니다.
-                        수익배분비율(RS)은 작가 기준 '40~50% 미만' 구조가 33.2%로 가장 보편적이며, 계약 체결 시 플랫폼이나 에이전시가 제시한 조건을 그대로 수용한 비율이
-                        73.1%에 달합니다.
-                    </p>
-
-                    <div class="chart-wrapper">
-                        <div class="chart-header">
-                            <span>웹툰 작가 실제 계약 형태 (대가지급방식)</span>
-                            <span class="source-tag">출처: 2025 웹툰산업 실태조사_일반배포용.pdf 232페이지 (2) 대가 지급 방식), 234페이지 (4)
-                                수익분배비율), 254페이지 (2) 계약 시, 계약 조건 결정 방식)</span>
-                        </div>
-                        <div class="multi-bar-chart">
-                            <div class="chart-segment segment-mg" style="width: 0%;" data-width="55.7">
-                                <span class="segment-label">MG 기반 55.7%</span>
-                                <div class="sub-segments">
-                                    <div class="sub-segment sub-monthly" style="width: 0%;" data-width="63.7"
-                                        data-text="월 MG (35.5%)">
-                                        <span class="sub-label">월 MG 35.5%</span>
-                                    </div>
-                                    <div class="sub-segment sub-accumulative" style="width: 0%;" data-width="36.3"
-                                        data-text="누적 MG (20.2%)">
-                                        <span class="sub-label">누적 MG 20.2%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="chart-segment segment-salary" style="width: 0%;" data-width="41.3">
-                                <span class="segment-label">원고료 41.3%</span>
-                            </div>
-                            <div class="chart-segment segment-etc" style="width: 0%;" data-width="3.0">
-                                <!-- 기타 3.0%는 좁아서 내부에 텍스트를 적지 않고 범례로만 표시 -->
-                                <span class="segment-label"></span>
-                            </div>
-                        </div>
-
-                        <!-- 실제 계약 형태 범례 추가 -->
-                        <div class="chart-legend-box">
-                            <span class="legend-item"><span class="legend-color color-mg"></span>MG 기반 계약 (55.7%)</span>
-                            <span class="legend-item"><span class="legend-color color-salary"></span>원고료 중심 계약
-                                (41.3%)</span>
-                            <span class="legend-item"><span class="legend-color color-etc"></span>기타 (3.0%)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 두 번째 대화 -->
-                <div id="contract-intro-chat" class="chat-container scene7-chat">
                     <div class="chat-message student-msg">
                         <img src="assets/student_face.png" alt="학생 얼굴" class="chat-profile">
                         <div class="chat-bubbles">
@@ -421,33 +354,173 @@
                     </div>
                 </div>
 
+                <!-- 개념 파트 1: MG 최소보장금 -->
+                <div class="comparison-board">
+                    <div class="jp-style">
+                        <h3>만화 업계 표준 방식</h3>
+                        <p class="definition"><strong>원고료:</strong> 만화를 그린 대가로 받는 돈이다. 만화계의 기본 정산 방식.</p>
+                    </div>
+                    <div class="kr-style">
+                        <div class="title-with-trigger">
+                            <h3>현재 한국 웹툰 업계 정산 방식 (1)</h3>
+                            <div class="stat-hover-trigger">
+                                <span class="chat-source-tag clickable-source">실제 계약 형태 ⓘ</span>
+                                <div class="statistics-container hover-popup">
+                                    <p class="stat-main-desc">
+                                        실제 시장의 대가지급방식은 순수 원고료 계약(41.3%)보다 월MG(35.5%) 및 누적MG(20.2%)를 활용하는 'MG 기반 계약'이 총 55.7%로 과반을 차지합니다.
+                                        수익배분비율(RS)은 작가 기준 '40~50% 미만' 구조가 33.2%로 가장 보편적이며, 계약 체결 시 플랫폼이나 에이전시가 제시한 조건을 그대로 수용한 비율이
+                                        73.1%에 달합니다.
+                                    </p>
+                                    <div class="chart-wrapper">
+                                        <div class="chart-header">
+                                            <span>웹툰 작가 실제 계약 형태 (대가지급방식)</span>
+                                            <span class="source-tag">출처: 2025 웹툰산업 실태조사_일반배포용.pdf 232페이지 (2) 대가 지급 방식), 234페이지 (4) 수익분배비율), 254페이지 (2) 계약 시, 계약 조건 결정 방식)</span>
+                                        </div>
+                                        <div class="multi-bar-chart">
+                                            <div class="chart-segment segment-mg" style="width: 0%;" data-width="55.7">
+                                                <span class="segment-label">MG 기반 55.7%</span>
+                                                <div class="sub-segments">
+                                                    <div class="sub-segment sub-monthly" style="width: 0%;" data-width="63.7"
+                                                        data-text="월 MG (35.5%)">
+                                                        <span class="sub-label">월 MG 35.5%</span>
+                                                    </div>
+                                                    <div class="sub-segment sub-accumulative" style="width: 0%;" data-width="36.3"
+                                                        data-text="누적 MG (20.2%)">
+                                                        <span class="sub-label">누적 MG 20.2%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="chart-segment segment-salary" style="width: 0%;" data-width="41.3">
+                                                <span class="segment-label">원고료 41.3%</span>
+                                            </div>
+                                            <div class="chart-segment segment-etc" style="width: 0%;" data-width="3.0">
+                                                <span class="segment-label"></span>
+                                            </div>
+                                        </div>
+                                        <div class="chart-legend-box">
+                                            <span class="legend-item"><span class="legend-color color-mg"></span>MG 기반 계약 (55.7%)</span>
+                                            <span class="legend-item"><span class="legend-color color-salary"></span>원고료 중심 계약 (41.3%)</span>
+                                            <span class="legend-item"><span class="legend-color color-etc"></span>기타 (3.0%)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="definition"><strong>MG(Minimum Guarantee, 최소보장금):</strong> 나중에 독자가 낼 유료 회차 값을 회사에서 미리
+                            당겨 쓰는 '가짜 월급(가불금)'이다.</p>
+                    </div>
+                </div>
+
+                <!-- 두 번째 대화 (MG와 RS/recoup 사이) -->
+                <div class="chat-container scene7-chat">
+                    <div class="chat-message pro-msg">
+                        <img src="assets/pro_face.png" alt="프로 얼굴" class="chat-profile">
+                        <div class="chat-bubbles">
+                            <div class="bubble">실제로 과반수 이상의 작품이 MG 계약을 하고 있어. 게다가 누적 MG 계약도 20%나 된다니까.</div>
+                        </div>
+                    </div>
+                    <div class="chat-message student-msg">
+                        <img src="assets/student_face.png" alt="학생 얼굴" class="chat-profile">
+                        <div class="chat-bubbles">
+                            <div class="bubble">과반수나요? 누적 MG는 월 MG랑 뭐가 다른데요?</div>
+                        </div>
+                    </div>
+                    <div class="chat-message pro-msg">
+                        <img src="assets/pro_face.png" alt="프로 얼굴" class="chat-profile">
+                        <div class="chat-bubbles">
+                            <div class="bubble">월 MG는 한 달이 지나면 정산이 리셋되지만, 누적 MG는 못 갚은 금액이 계속 다음 달로 이월되어서 쌓이는 방식이야. 결국 작품이 크게 흥행하지 못하면 계속 빚만 쌓이는 거지.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 개념 파트 2: RS & 리쿠프 -->
+                <div class="comparison-board">
+                    <div class="jp-style" style="opacity: 0; pointer-events: none;">
+                        <h3>만화 업계 표준 방식</h3>
+                        <p class="definition"><strong>원고료:</strong> 만화를 그린 대가로 받는 돈이다.</p>
+                    </div>
+                    <div class="kr-style">
+                        <h3>현재 한국 웹툰 업계 정산 방식 (2)</h3>
+                        <p class="definition"><strong>RS(Revenue Share, 수익 배분):</strong>
+                            플랫폼이나 에이전시와 작가가 수익을 배분하는 비율이다. <br>(예시: RS 40 = 작가가 유료 수익 중 40%를 가져감)</p>
+                        <p class="definition"><strong>리쿠프(Recoup, 차감):</strong> 만화가 돈을 벌었을 때, 미리 받았던 가불금(MG)만큼을 먼저 채워
+                            넣어야 하는 보이지 않는 저금통.</p>
+                    </div>
+                </div>
+
+                <!-- 세 번째 대화 (RS/recoup 다음) -->
+                <div class="chat-container scene7-chat">
+                    <div class="chat-message student-msg">
+                        <img src="assets/student_face.png" alt="학생 얼굴" class="chat-profile">
+                        <div class="chat-bubbles">
+                            <div class="bubble">rs? 리쿠프? 이 어려운 단어들은 또 뭐예요....</div>
+                        </div>
+                    </div>
+                    <div class="chat-message pro-msg">
+                        <img src="assets/pro_face.png" alt="프로 얼굴" class="chat-profile">
+                        <div class="chat-bubbles">
+                            <div class="bubble">쉽게 말해, <strong>RS는 플랫폼과 작가가 돈을 나누는 비율</strong>이고, <strong>리쿠프는 네가 미리 받아 간 가불금(MG)을 메꿔 넣어야 하는 규칙</strong>이야. 이 두 규칙이 복잡하게 얽히면서 작가에게 불리하게 작동하곤 하지.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 두 번째 대화 (계약서 확인용 안내) -->
+                <div id="contract-intro-chat" class="chat-container scene7-chat">
+                    <div class="chat-message student-msg">
+                        <img src="assets/student_face.png" alt="학생 얼굴" class="chat-profile">
+                        <div class="chat-bubbles">
+                            <div class="bubble">그럼 제가 방금 선택한 계약서도 위험한 조항들이 있는 건가요?</div>
+                        </div>
+                    </div>
+                    <div class="chat-message pro-msg">
+                        <img src="assets/pro_face.png" alt="프로 얼굴" class="chat-profile">
+                        <div class="chat-bubbles">
+                            <div class="bubble">네가 선택한 계약서를 다시 띄워줄게. 밑줄 쳐진 핵심 조항들을 눌러보면서 어떤 독소 조항들이 숨어 있는지 직접 확인해봐.</div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 선택된 계약서 다시 보기 영역 -->
                 <div id="selected-contract-display" class="selected-contract-display">
                     <!-- 스크립트에서 주입됨 -->
                 </div>
                 <div id="click-guide-text" class="click-guide-text">밑줄 친 부분을 클릭해보세요!</div>
 
-                <div class="guide-group">
-                    <div class="guide-item">
+                <!-- 개념어 설명 파트 (카드가 리스트 형식으로 변경) -->
+                <div class="concept-cards-container">
+                    <div class="concept-card-section">
                         <h4>MG 종류</h4>
-                        <ul class="keyword-list">
-                            <li class="toxic-keyword"
-                                data-desc="매달 MG를 먼저 지급받고 수익으로 그 MG를 갚는다. 이번 달에 MG를 다 못 채워도 다음 달에 빚이 쌓이지 않는다.">월 MG</li>
-                            <li class="toxic-keyword" data-desc="이번 달에 못 갚은 MG가 다음 달로 넘어가서, 빚을 다 청산하기 전까지 수익이 나지 않는다.">
-                                누적 MG</li>
-                            <li class="toxic-keyword" data-desc="한국, 해외, 혹은 다른 작품 매출까지 전부 하나로 합쳐서 MG를 갚게 만드는 방식이다.">통합
-                                MG</li>
-                            <li class="toxic-keyword"
-                                data-desc="한 시즌(예: 50화) 분량의 돈을 한 번에 통째로 묶어 주는 방식이다. 휴재하거나 마감이 늦어지면 작가가 손해를 감수해야한다.">시즌
-                                MG</li>
-                        </ul>
+                        <div class="concept-card-list">
+                            <div class="concept-mini-card">
+                                <span class="card-term">월 MG</span>
+                                <p class="card-definition">매달 MG를 먼저 지급받고 수익으로 그 MG를 갚는다. 이번 달에 MG를 다 못 채워도 다음 달에 빚이 쌓이지 않는다.</p>
+                            </div>
+                            <div class="concept-mini-card">
+                                <span class="card-term">누적 MG</span>
+                                <p class="card-definition">이번 달에 못 갚은 MG가 다음 달로 넘어가서, 빚을 다 청산하기 전까지 수익이 나지 않는다.</p>
+                            </div>
+                            <div class="concept-mini-card">
+                                <span class="card-term">통합 MG</span>
+                                <p class="card-definition">한국, 해외, 혹은 다른 작품 매출까지 전부 하나로 합쳐서 MG를 갚게 만드는 방식이다.</p>
+                            </div>
+                            <div class="concept-mini-card">
+                                <span class="card-term">시즌 MG</span>
+                                <p class="card-definition">한 시즌(예: 50화) 분량의 돈을 한 번에 통째로 묶어 주는 방식이다. 휴재하거나 마감이 늦어지면 작가가 손해를 감수해야 한다.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="guide-item">
+                    <div class="concept-card-section">
                         <h4>차감 종류</h4>
-                        <ul class="keyword-list">
-                            <li class="toxic-keyword" data-desc="전체 매출에서 MG를 먼저 갚고 남은 돈을 나눈다.">선차감</li>
-                            <li class="toxic-keyword" data-desc="전체 매출을 회사와 먼저 나눈 뒤, '작가 몫'에서만 MG를 차감한다.">후차감</li>
-                        </ul>
+                        <div class="concept-card-list">
+                            <div class="concept-mini-card">
+                                <span class="card-term">선차감</span>
+                                <p class="card-definition">전체 매출에서 MG를 먼저 갚고 남은 돈을 나눈다.</p>
+                            </div>
+                            <div class="concept-mini-card">
+                                <span class="card-term">후차감</span>
+                                <p class="card-definition">전체 매출을 회사와 먼저 나눈 뒤, '작가 몫'에서만 MG를 차감한다.</p>
+                            </div>
+                        </div>
 
                         <div class="split-ratio-bar-wrapper">
                             <div class="split-ratio-title">차감 방식 비율 (사업체 기준)</div>
@@ -466,7 +539,37 @@
                         </div>
                     </div>
                 </div>
-                <div class="tooltip-display" id="tooltip-display">마우스를 올려 확인해보세요.</div>
+
+                <!-- 구체적 수치 예시 대화 (개념 카드 리스트 밑에 삽입) -->
+                <div class="chat-container scene7-chat">
+                    <div class="chat-message pro-msg">
+                        <img src="assets/pro_face.png" alt="프로 얼굴" class="chat-profile">
+                        <div class="chat-bubbles">
+                            <div class="bubble">예를 들어 내가 회당 MG 150만 원에 계약을 했다고 치자. 한 달(4화 기준) 동안 총 600만 원의 MG를 가불받은 셈이지.</div>
+                            <div class="bubble">만약 이 작품의 유료 매출이 1,000만 원이고, 작가 RS(수익 분배 비율)가 40%라면 어떨까?</div>
+                        </div>
+                    </div>
+                    <div class="chat-message student-msg">
+                        <img src="assets/student_face.png" alt="학생 얼굴" class="chat-profile">
+                        <div class="chat-bubbles">
+                            <div class="bubble">음, 둘 다 매출은 1,000만 원인데 똑같이 버는 거 아닌가요?</div>
+                        </div>
+                    </div>
+                    <div class="chat-message pro-msg">
+                        <img src="assets/pro_face.png" alt="프로 얼굴" class="chat-profile">
+                        <div class="chat-bubbles">
+                            <div class="bubble">전혀 달라. <strong>선차감</strong>은 매출 1,000만 원에서 MG 600만 원을 먼저 갚은 뒤, 남은 400만 원의 40%인 <strong>추가 정산금 160만 원</strong>을 더 받아가. (총 수령액 760만 원)</div>
+                            <div class="bubble">반면 <strong>후차감</strong>은 전체 매출을 RS 비율대로 쪼개서 작가 몫(40%) 400만 원을 먼저 정해. 그리고 그 '작가 몫'에서 MG 600만 원을 차감하지.</div>
+                            <div class="bubble">결국 추가 정산금은 <strong>0원</strong>이 되고, 갚지 못한 200만 원은 다음 달 <strong>누적 MG(빚)</strong>로 이월되는 거야.</div>
+                        </div>
+                    </div>
+                    <div class="chat-message student-msg">
+                        <img src="assets/student_face.png" alt="학생 얼굴" class="chat-profile">
+                        <div class="chat-bubbles">
+                            <div class="bubble">헐… 매출은 똑같이 1,000만 원인데 정산 방식 하나로 빚쟁이가 되다니… 정말 너무하네요.</div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- 출처: 2025 웹툰산업 실태조사_일반배포용.pdf 181페이지 (1) 2024년 주로 창작 작업을 한 방식), 190페이지 (8) 월평균 창작 활동비용-보조인력비), 192페이지 (1) 일주일 중 창작을 하는 평균 일수), 193페이지 (2) 일주일 중 창작하는 날의 평균 소요 시간) -->
                 <div class="warning-text-container init-fade-in">

@@ -1275,61 +1275,73 @@ h4,
     border: 2px dashed var(--warning-color);
 }
 
-.guide-group {
+.concept-cards-container {
     display: flex;
-    justify-content: space-around;
     gap: 2rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    width: 100%;
 }
 
-.guide-item {
+.concept-card-section {
     flex: 1;
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: 20px;
+    padding: 1.8rem;
+    border: 1px dashed rgba(0, 0, 0, 0.12);
 }
 
-.guide-item h4 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+.concept-card-section h4 {
+    font-size: 1.35rem;
+    margin-bottom: 1.2rem;
+    color: var(--text-color);
     border-bottom: 2px solid var(--text-color);
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.4rem;
+    display: inline-block;
 }
 
-.keyword-list {
-    list-style: none;
-}
-
-.keyword-list li {
-    font-size: 1.2rem;
-    padding: 1rem;
-    margin-bottom: 0.5rem;
-    background: #F8F9FA;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.toxic-keyword {
-    cursor: help;
-    font-weight: 700;
-}
-
-.toxic-keyword:hover,
-.toxic-keyword.active-highlight {
-    background-color: #FFEAEA !important;
-    color: var(--warning-color);
-    transform: translateX(10px);
-}
-
-.tooltip-display {
-    margin-top: 2rem;
-    padding: 1.5rem;
-    background: var(--dark-panel);
-    color: white;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 1.1rem;
-    min-height: 80px;
+.concept-card-list {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.concept-mini-card {
+    background: var(--card-bg);
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.concept-mini-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.04);
+    border-color: var(--accent-color);
+}
+
+.card-term {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--accent-color);
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.card-definition {
+    font-size: 0.88rem;
+    color: #4A5568;
+    line-height: 1.45;
+    word-break: keep-all;
+}
+
+/* media query overrides */
+@media (max-width: 768px) {
+    .concept-cards-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
 }
 
 /* --- Scene 8: Outro --- */
@@ -1657,6 +1669,42 @@ h4,
 }
 
 /* Statistics / Infographics */
+.title-with-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    width: 100%;
+}
+
+.stat-hover-trigger {
+    position: relative;
+    display: inline-block;
+}
+
+.clickable-source {
+    display: inline-flex;
+    align-items: center;
+    background: #E8ECEF;
+    color: #555;
+    border: 1px solid #C4C9CC;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.clickable-source:hover {
+    background: #FFDC00;
+    color: #1D1D1D;
+    border-color: #1D1D1D;
+    box-shadow: 0 4px 10px rgba(255, 220, 0, 0.3);
+    transform: translateY(-1px);
+}
+
 .statistics-container {
     margin-top: 3rem;
     background: rgba(255, 255, 255, 0.7);
@@ -1669,6 +1717,53 @@ h4,
     margin-right: auto;
     backdrop-filter: blur(10px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+.statistics-container.hover-popup {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    width: 640px;
+    max-width: 90vw;
+    background: #FFFFFF;
+    border: 2px solid #1D1D1D;
+    border-radius: 24px;
+    padding: 2rem;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    z-index: 1000;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    transform-origin: top left;
+}
+
+/* Hover active state */
+.stat-hover-trigger:hover .statistics-container.hover-popup {
+    display: block;
+    animation: popupFadeIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.statistics-container.hover-popup .stat-main-desc {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.statistics-container.hover-popup .chart-wrapper {
+    padding: 1.5rem;
+    margin-bottom: 0;
+}
+
+@keyframes popupFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.96) translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 .stat-main-desc {

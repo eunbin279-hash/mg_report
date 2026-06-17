@@ -317,42 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* --- Scene 7: MG Explanations & Tooltips --- */
-    const tooltipDisplay = document.getElementById('tooltip-display');
-    const defaultTooltipText = '마우스를 올려 확인해보세요.';
 
-    function bindTooltips(elements) {
-        elements.forEach(keyword => {
-            keyword.addEventListener('mouseenter', (e) => {
-                const desc = e.target.getAttribute('data-desc');
-                if (!desc) return;
-                tooltipDisplay.innerText = desc;
-                tooltipDisplay.style.backgroundColor = '#FFEAEA';
-                tooltipDisplay.style.color = 'var(--warning-color)';
-                tooltipDisplay.style.fontWeight = '700';
-                e.target.classList.add('active-highlight');
-            });
-
-            keyword.addEventListener('mouseleave', (e) => {
-                tooltipDisplay.innerText = defaultTooltipText;
-                tooltipDisplay.style.backgroundColor = 'var(--dark-panel)';
-                tooltipDisplay.style.color = 'white';
-                tooltipDisplay.style.fontWeight = '400';
-                e.target.classList.remove('active-highlight');
-            });
-
-            keyword.addEventListener('click', (e) => {
-                if (window.innerWidth <= 768) {
-                    e.stopPropagation();
-                    const desc = e.target.getAttribute('data-desc');
-                    if (!desc) return;
-                    showInlineTooltip(e.target, desc, e.target.innerText);
-                }
-            });
-        });
-    }
-
-    const initialToxicKeywords = document.querySelectorAll('.guide-group .toxic-keyword');
-    bindTooltips(initialToxicKeywords);
 
     let currentInlineTooltip = null;
     function showInlineTooltip(element, desc, title) {
@@ -403,24 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Auto highlight using IntersectionObserver for Scene 7
-    const scene7 = document.getElementById('scene-7');
-    const scene7Observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-            let delay = 500;
-            const currentKeywords = document.querySelectorAll('.guide-group .toxic-keyword');
-            currentKeywords.forEach((k) => {
-                setTimeout(() => {
-                    k.classList.add('active-highlight');
-                    setTimeout(() => k.classList.remove('active-highlight'), 800);
-                }, delay);
-                delay += 800;
-            });
 
-        }
-    }, { threshold: 0.3 });
-
-    scene7Observer.observe(scene7);
 
     // Auto scroll for contracts on mobile (Scene 6)
     const scene6 = document.getElementById('scene-6');
@@ -680,6 +628,31 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             observer.observe(introProMsg, { attributes: true });
         }
+    }
+
+    /* --- Hover Popup Chart Animation Logic --- */
+    const statHoverTrigger = document.querySelector('.stat-hover-trigger');
+    const hoverPopup = document.querySelector('.statistics-container.hover-popup');
+    if (statHoverTrigger && hoverPopup) {
+        const segments = hoverPopup.querySelectorAll('.chart-segment, .sub-segment');
+        
+        statHoverTrigger.addEventListener('mouseenter', () => {
+            segments.forEach(seg => {
+                const widthVal = seg.getAttribute('data-width');
+                if (widthVal) {
+                    const delay = seg.classList.contains('sub-segment') ? 400 : 100;
+                    setTimeout(() => {
+                        seg.style.width = `${widthVal}%`;
+                    }, delay);
+                }
+            });
+        });
+        
+        statHoverTrigger.addEventListener('mouseleave', () => {
+            segments.forEach(seg => {
+                seg.style.width = '0%';
+            });
+        });
     }
 
     // Register all elements to observe
