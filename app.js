@@ -589,6 +589,99 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /* --- Damage Cases Carousel Logic --- */
+    const carouselTrack = document.querySelector('.carousel-track');
+    if (carouselTrack) {
+        const cards = carouselTrack.querySelectorAll('.carousel-card');
+        const dots = document.querySelectorAll('.carousel-dots .dot');
+        let currentIndex = 0;
+        let slideInterval = null;
+
+        const showSlide = (index) => {
+            cards.forEach(card => {
+                card.classList.remove('active', 'prev', 'next');
+            });
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            const len = cards.length;
+            const prevIndex = (index - 1 + len) % len;
+            const nextIndex = (index + 1) % len;
+
+            cards[index].classList.add('active');
+            cards[prevIndex].classList.add('prev');
+            cards[nextIndex].classList.add('next');
+            dots[index].classList.add('active');
+            
+            currentIndex = index;
+        };
+
+        const startSlide = () => {
+            slideInterval = setInterval(() => {
+                let nextIndex = (currentIndex + 1) % cards.length;
+                showSlide(nextIndex);
+            }, 4500);
+        };
+
+        const stopSlide = () => {
+            if (slideInterval) clearInterval(slideInterval);
+        };
+
+        // Click event for dots
+        dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                const index = parseInt(e.target.getAttribute('data-index'));
+                showSlide(index);
+                stopSlide();
+                startSlide();
+            });
+        });
+
+        // Click event for side cards to slide them into focus
+        cards.forEach((card, index) => {
+            card.addEventListener('click', () => {
+                if (card.classList.contains('prev') || card.classList.contains('next')) {
+                    showSlide(index);
+                    stopSlide();
+                    startSlide();
+                }
+            });
+        });
+
+        // Initialize first state
+        showSlide(0);
+
+        // Start auto slide
+        startSlide();
+
+        // Pause auto slide on hover
+        const carouselContainer = document.querySelector('.carousel-container');
+        if (carouselContainer) {
+            carouselContainer.addEventListener('mouseenter', stopSlide);
+            carouselContainer.addEventListener('mouseleave', startSlide);
+        }
+    }
+
+    /* --- Outro Chat Mystery Friend Reveal Logic --- */
+    const outroChat = document.querySelector('.outro-chat-container');
+    if (outroChat) {
+        const unnamedFriendMsg = outroChat.querySelector('.friend-msg.init-unnamed');
+        const introProMsg = outroChat.querySelectorAll('.chat-message.pro-msg')[4]; // 5th pro-msg (index 4)
+
+        if (unnamedFriendMsg && introProMsg) {
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach(mutation => {
+                     if (mutation.attributeName === 'class' && introProMsg.classList.contains('visible')) {
+                         setTimeout(() => {
+                             unnamedFriendMsg.classList.remove('init-unnamed');
+                         }, 600);
+                         observer.disconnect();
+                     }
+                });
+            });
+            observer.observe(introProMsg, { attributes: true });
+        }
+    }
+
     // Register all elements to observe
     const animatedElements = document.querySelectorAll('.init-fade-in, .split-ratio-bar-wrapper, .contract-partner-stats');
     animatedElements.forEach(el => statsObserver.observe(el));
