@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const modalContent = modal.querySelector('.modal-content');
             if (modalContent) {
-                modalContent.className = 'modal-content warning-anim';
+                modalContent.className = 'modal-content bouncy-popup-anim';
                 if (platform === 'A') {
                     modalContent.classList.add('type-danger');
                 } else if (platform === 'B') {
@@ -666,6 +666,34 @@ document.addEventListener('DOMContentLoaded', () => {
         if (carouselContainer) {
             carouselContainer.addEventListener('mouseenter', stopSlide);
             carouselContainer.addEventListener('mouseleave', startSlide);
+
+            // Touch swipe support for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            carouselContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].clientX;
+            }, { passive: true });
+
+            carouselContainer.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].clientX;
+                const swipeDistance = touchStartX - touchEndX;
+                const threshold = 50; // min distance in pixels
+
+                if (Math.abs(swipeDistance) > threshold) {
+                    if (swipeDistance > 0) {
+                        // Swipe left -> Next slide
+                        let nextIndex = (currentIndex + 1) % cards.length;
+                        showSlide(nextIndex);
+                    } else {
+                        // Swipe right -> Prev slide
+                        let prevIndex = (currentIndex - 1 + cards.length) % cards.length;
+                        showSlide(prevIndex);
+                    }
+                    stopSlide();
+                    startSlide();
+                }
+            }, { passive: true });
         }
     }
 
