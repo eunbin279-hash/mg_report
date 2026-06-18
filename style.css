@@ -2583,7 +2583,7 @@ h4,
 
 .carousel-track {
     position: relative;
-    min-height: 350px;
+    min-height: 460px;
     display: flex;
     align-items: center;
     justify-content: center;
