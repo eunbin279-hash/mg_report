@@ -2891,7 +2891,7 @@ h4,
     word-break: keep-all;
 }
 
-/* --- Scene 9 Additions: Outro Advice Speech Bubbles --- */
+/* --- Scene 9 Additions: Outro Advice Sticky Notes --- */
 .outro-advice-section {
     width: 100%;
     max-width: 950px;
@@ -2902,109 +2902,152 @@ h4,
     display: flex;
     gap: 3rem;
     justify-content: center;
-    align-items: flex-end;
+    align-items: stretch;
 }
 
-.advice-block {
+.advice-postit {
     flex: 1;
+    background: #FFF9C4;
+    color: #333333;
+    padding: 2rem;
+    box-shadow: 2px 8px 16px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.06);
+    position: relative;
+    border-radius: 4px;
+    min-height: 250px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    position: relative;
-}
-
-/* Speech Bubble Style */
-.advice-block .speech-bubble {
-    background: white;
-    color: var(--text-color);
-    border-radius: 20px;
-    padding: 1.8rem;
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
-    position: relative;
-    margin-bottom: 2rem;
+    justify-content: flex-start;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     opacity: 0;
     transform: translateY(20px) scale(0.95);
-    transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-    word-break: keep-all;
-    min-height: 240px;
 }
 
-.outro-advice-section.animate-active .speech-bubble {
+.outro-advice-section.animate-active .advice-postit {
     opacity: 1;
-    transform: translateY(0) scale(1);
 }
 
-.outro-advice-section.animate-active .advice-friend .speech-bubble {
-    transition-delay: 0.5s;
+.outro-advice-section.animate-active .postit-pro {
+    transform: translateY(0) rotate(-1.5deg) scale(1);
+    transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Tail of Speech Bubble */
-.advice-block .speech-bubble::after {
+.outro-advice-section.animate-active .postit-friend {
+    transform: translateY(0) rotate(1.2deg) scale(1);
+    transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s;
+}
+
+/* Adhesive Tape at top center */
+.advice-postit::before {
     content: '';
     position: absolute;
-    bottom: -15px;
+    top: -12px;
     left: 50%;
-    transform: translateX(-50%);
-    border-width: 15px 15px 0;
-    border-style: solid;
-    border-color: white transparent;
-    display: block;
-    width: 0;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 80px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(1px);
+    border-left: 1px dashed rgba(0, 0, 0, 0.08);
+    border-right: 1px dashed rgba(0, 0, 0, 0.08);
+    z-index: 2;
 }
 
-/* Different Speech Bubble styles for Pro and Friend */
-.bubble-pro {
-    border-top: 5px solid var(--accent-color);
+/* Post-it colors */
+.postit-pro {
+    background: #FEF9E7; /* Soft yellow cream */
 }
 
-.bubble-friend {
-    border-top: 5px solid #00D5D5;
+.postit-friend {
+    background: #EAF2F8; /* Soft blue */
 }
 
-.advice-block .speech-bubble p {
+.postit-pro:hover {
+    transform: rotate(-0.5deg) scale(1.02) !important;
+    box-shadow: 4px 12px 20px rgba(0, 0, 0, 0.18) !important;
+}
+
+.postit-friend:hover {
+    transform: rotate(0.2deg) scale(1.02) !important;
+    box-shadow: 4px 12px 20px rgba(0, 0, 0, 0.18) !important;
+}
+
+.postit-header {
+    font-family: 'NanumSquare', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #222;
+    margin-bottom: 1rem;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.12);
+    padding-bottom: 0.5rem;
+}
+
+.advice-postit p {
     font-family: 'BelovedMyoeunttobak', 'NanumSquare', sans-serif;
     font-size: 1.15rem;
     line-height: 1.7;
+    color: #444;
     margin: 0;
+    word-break: keep-all;
 }
 
-.char-image-wrapper {
+/* --- Outro Campaign Guide Side Characters Layout --- */
+.guide-section-wrapper {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 2.5rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 4rem auto 0 auto;
+}
+
+.guide-char {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.8rem;
-}
-
-.advice-char-img {
-    height: 280px;
-    object-fit: contain;
-    filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.15));
+    justify-content: flex-end;
+    width: 120px;
+    flex-shrink: 0;
+    margin-bottom: 2rem;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease, filter 0.3s;
 }
 
-.outro-advice-section.animate-active .advice-char-img {
+.guide-section-wrapper.animate-active .guide-char {
     opacity: 1;
     transform: translateY(0);
 }
 
-.outro-advice-section.animate-active .advice-friend .advice-char-img {
-    transition-delay: 0.3s;
+.guide-section-wrapper.animate-active .guide-char-left {
+    transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.advice-char-img:hover {
-    transform: scale(1.03);
+.guide-section-wrapper.animate-active .guide-char-right {
+    transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
 }
 
-.light-scene .char-name-label {
-    background: rgba(0, 0, 0, 0.06);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 0.4rem 1.2rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
+.guide-side-img {
+    height: 200px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.25));
+    transition: transform 0.3s ease;
+}
+
+.guide-side-img:hover {
+    transform: translateY(-5px) scale(1.04);
+}
+
+.guide-char-name {
+    font-size: 0.85rem;
+    color: #AAA;
+    margin-top: 0.6rem;
     font-weight: 700;
-    color: var(--text-color);
+    font-family: 'NanumSquare', sans-serif;
+}
+
+.authors-note {
+    flex: 1;
 }
 
 /* Responsive */
@@ -3664,22 +3707,21 @@ h4,
     }
 
     .advice-container {
-        flex-direction: column;
-        gap: 4rem;
-        align-items: center;
+        flex-direction: column !important;
+        gap: 3rem !important;
+        align-items: center !important;
     }
 
-    .advice-block {
-        width: 100%;
+    .advice-postit {
+        width: 100% !important;
+        min-height: auto !important;
+        padding: 1.5rem 1.2rem !important;
+        margin-bottom: 0 !important;
     }
 
-    .advice-block .speech-bubble {
-        min-height: auto;
-        padding: 1.2rem;
-    }
-
-    .advice-char-img {
-        height: 220px;
+    .outro-advice-section.animate-active .postit-pro,
+    .outro-advice-section.animate-active .postit-friend {
+        transform: translateY(0) rotate(0deg) scale(1) !important;
     }
 }
 
@@ -3908,5 +3950,16 @@ h4,
         text-align: center !important;
         margin-top: 1rem !important;
         font-family: 'NanumSquare', sans-serif !important;
+    }
+
+    .guide-section-wrapper {
+        flex-direction: column !important;
+        align-items: center !important;
+        margin-top: 2rem !important;
+        gap: 1.5rem !important;
+    }
+
+    .guide-char {
+        display: none !important;
     }
 }
