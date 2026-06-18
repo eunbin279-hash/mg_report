@@ -2991,6 +2991,17 @@ h4,
     word-break: keep-all;
 }
 
+.postit-source {
+    font-size: 0.82rem;
+    color: #7A7A7F;
+    text-align: right;
+    margin-top: auto;
+    padding-top: 1.2rem;
+    font-family: 'NanumSquare', sans-serif;
+    font-weight: 700;
+    opacity: 0.85;
+}
+
 /* --- Outro Campaign Guide Side Characters Layout --- */
 .guide-section-wrapper {
     display: flex;
