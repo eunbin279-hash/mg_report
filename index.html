@@ -40,63 +40,28 @@
 
     <!-- Scene 1 -->
     <section id="scene-1" class="scene intro-scene">
-        <!-- 핑크 배경 그래픽 (hand_dp.png & coin_dp.svg) -->
-        <div class="intro-bg-graphics">
-            <!-- 왼쪽 아래 손 -->
-            <img src="assets/hand_dp.png" alt="손 그래픽" class="bg-deco deco-hand-bl">
-            <!-- 오른쪽 위 손 -->
-            <img src="assets/hand_dp.png" alt="손 그래픽" class="bg-deco deco-hand-tr">
-            <!-- 오른쪽 아래 손 -->
-            <img src="assets/hand_dp.png" alt="손 그래픽" class="bg-deco deco-hand-br">
-            <!-- 코인 (전체 화면 배치) -->
-            <img src="assets/coin_dp.svg" alt="코인 그래픽" class="bg-deco deco-coin-full">
-        </div>
+        <!-- 수평 민트색 라인 -->
+        <div class="horizontal-bg-bar"></div>
 
         <div class="content-wrapper intro-content">
-            <!-- 수평 민트색 라인 -->
-            <div class="horizontal-bg-bar"></div>
 
-            <div class="intro-title-wrapper">
-                <h1 class="main-title typography-title" id="intro-title">
-                    <!-- 좌측: 웹툰작가는 -->
-                    <div class="title-left">
-                        <div class="title-row row-1">
-                            <span class="char" style="--char-index: 1;">웹</span>
-                            <span class="char" style="--char-index: 2;">툰</span>
-                            <span class="char" style="--char-index: 3;">작</span>
-                            <span class="char" style="--char-index: 4;">가</span>
-                            <span class="char" style="--char-index: 5;">는</span>
-                        </div>
-                    </div>
-                    <!-- 우측: 1년에 얼마 벌까? -->
-                    <div class="title-right">
-                        <div class="title-row row-2">
-                            <span class="char" style="--char-index: 6;">1</span>
-                            <span class="char" style="--char-index: 7;">년</span>
-                            <span class="char" style="--char-index: 8;">에</span>
-                        </div>
-                        <div class="title-row row-3">
-                            <span class="char" style="--char-index: 9;">얼</span>
-                            <span class="char" style="--char-index: 10;">마</span>
-                        </div>
-                        <div class="title-row row-4">
-                            <span class="char" style="--char-index: 11;">벌</span>
-                            <span class="char" style="--char-index: 12;">까</span>
-                            <span class="char" style="--char-index: 13;">?</span>
-                        </div>
-                    </div>
-                </h1>
-            </div>
-
-            <!-- 민트 박스 부제 -->
-            <div class="intro-subtitle-box">
-                <p>웹툰 정산 제도의 정보 불균형 해결을 위한 인터랙티브 저널</p>
-            </div>
-
-            <!-- 하단 제작 정보 -->
+            <!-- 좌측 상단 제작 정보 -->
             <div class="intro-credit">
                 <p class="intro-credit-label">Designed by 노은빈</p>
                 <p class="intro-credit-year">2026.</p>
+            </div>
+
+            <div class="intro-title-container">
+                <div class="intro-title-wrapper">
+                    <h1 class="main-title typography-title" id="intro-title">
+                        <img src="assets/mg_title.svg" alt="웹툰작가는 1년에 얼마 벌까?" class="intro-title-img">
+                    </h1>
+                </div>
+
+                <!-- 민트 박스 부제 -->
+                <div class="intro-subtitle-box">
+                    <p>웹툰 정산 제도의 <br class="mobile-only">정보 불균형 해결을 위한 <br class="mobile-only">인터랙티브 저널</p>
+                </div>
             </div>
 
             <div class="scroll-indicator intro-scroll">스크롤하여 알아보기 <span>↓</span></div>

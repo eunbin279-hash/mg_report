@@ -120,12 +120,33 @@ h4,
     color: var(--warning-color);
 }
 
+/* Utility Classes */
+.mobile-only {
+    display: none;
+}
+
 /* --- Scene 1: Intro --- */
 .intro-scene {
     background-color: #D6F6F6;
     position: relative;
     overflow: hidden;
     height: 100vh;
+}
+
+/* 민트색 하프톤 그라데이션 배경 레이어 */
+.intro-scene::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgba(0, 225, 225, 0.35) 1.5px, transparent 1.5px);
+    background-size: 10px 10px;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .intro-content {
@@ -188,9 +209,9 @@ h4,
 .share-txt-btn {
     background-color: #00E1E1;
     color: #1D1D1D;
-    border: 1px solid #1D1D1D;
-    border-radius: 6px;
-    padding: 0.6rem 1.4rem;
+    border: none;
+    border-radius: 4px;
+    padding: 0.45rem 1.1rem;
     font-weight: 800;
     font-size: 1.05rem;
     cursor: pointer;
@@ -298,72 +319,7 @@ h4,
     color: #00C4C4;
 }
 
-/* 핑크 배경 그래픽 (hand_dp.png & coin_dp.svg) */
-.intro-bg-graphics {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 2;
-}
 
-.bg-deco {
-    position: absolute;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 1s ease;
-}
-
-#scene-1.active .bg-deco {
-    opacity: 0.85;
-}
-
-/* 이미지는 5단계: 가장 마지막에 등장 */
-
-/* 손 배치 */
-.deco-hand-bl {
-    left: -3%;
-    bottom: -8%;
-    width: 30vw;
-    max-width: 420px;
-    transform: scaleX(-1);
-    transition-delay: 3.6s;
-}
-
-.deco-hand-tr {
-    right: 2%;
-    top: -5%;
-    width: 22vw;
-    max-width: 320px;
-    transform: rotate(180deg);
-    transition-delay: 3.9s;
-}
-
-.deco-hand-br {
-    right: -2%;
-    bottom: -5%;
-    width: 24vw;
-    max-width: 340px;
-    transform: rotate(-20deg);
-    transition-delay: 4.2s;
-}
-
-/* 코인 - 전체 화면 배경 채우기 */
-.deco-coin-full {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition-delay: 3.8s;
-    opacity: 0;
-}
-
-#scene-1.active .deco-coin-full {
-    opacity: 0.45;
-}
 
 /* 얼마 벌까? 뒤에 깔리는 민트 수평 바 */
 .horizontal-bg-bar {
@@ -382,93 +338,53 @@ h4,
     transition-delay: 1.2s;
 }
 
-/* 타이틀 래퍼 - 2열 구조 */
+/* 타이틀 래퍼 - SVG 이미지 기반 구조 */
+.intro-title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 720px;
+    z-index: 3;
+    position: relative;
+    margin-bottom: 2rem;
+    align-self: center;
+}
+
 .intro-title-wrapper {
     position: relative;
     z-index: 3;
     width: 100%;
-    margin-bottom: 2rem;
-}
-
-.typography-title {
-    font-size: 5.5rem !important;
-    line-height: 1.15;
-    font-weight: normal;
-    color: #1D1D1D;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
     margin-bottom: 0;
-    text-align: left;
 }
 
-.title-left {
-    flex-shrink: 0;
-    font-size: 1.5em;
+#intro-title {
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
 }
 
-.title-right {
-    text-align: right;
-}
-
-.title-row {
-    display: flex;
-    gap: -0.05em;
-}
-
-.title-left .title-row {
-    justify-content: flex-start;
-}
-
-.title-right .title-row {
-    justify-content: flex-end;
-}
-
-.char {
-    display: inline-block;
+.intro-title-img {
+    display: block;
+    width: 100%;
+    height: auto;
     opacity: 0;
-    transform: translateY(-30px);
-    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                opacity 0.8s ease;
-    margin-right: -0.06em;
+    transform: translateY(-25px);
+    transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                opacity 1.2s ease;
 }
 
-.char-space {
-    display: inline-block;
-    width: 1.5rem;
-}
-
-/* 1단계: 웹툰작가는 (char 1~5) → 0.3s부터 순차 등장 */
-.title-left .char {
-    transition-delay: 0s;
-}
-#scene-1.active .title-left .char {
+#scene-1.active .intro-title-img {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: calc(var(--char-index) * 100ms + 0.2s);
+    transition-delay: 0.4s;
 }
 
-/* 3단계: 1년에 얼마 벌까? (char 6~13) → 민트선 이후 등장 */
-.title-right .char {
-    transition-delay: 0s;
-}
-#scene-1.active .title-right .char {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: calc((var(--char-index) - 5) * 100ms + 2.0s);
-}
-
-/* 부제 민트 박스 */
+/* 부제 민트 박스 (타이틀 위에 배치, 가운데 정렬, 테두리 없음) */
 .intro-subtitle-box {
-    background-color: #00E1E1;
-    color: #1D1D1D;
-    border: 1px solid #1D1D1D;
-    border-radius: 4px;
-    padding: 0.7rem 1.6rem;
+    color: #00B5B5;
     font-weight: 800;
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     letter-spacing: -0.02em;
     position: relative;
     z-index: 3;
@@ -477,42 +393,46 @@ h4,
     transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), 
                 opacity 1s ease;
     display: inline-block;
-    margin-top: -2rem;
+    align-self: center;
+    margin-top: 1.8rem;
+    margin-bottom: 0;
+    text-align: center;
 }
 
-/* 4단계: 나머지 글자 요소 떠오름 */
+/* 4단계: 부제 박스 떠오름 */
 #scene-1.active .intro-subtitle-box {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: 3.0s;
+    transition-delay: 1.5s;
 }
 
-/* 제작 정보 */
+/* 제작 정보 (좌측 상단 배치, 크기 축소) */
 .intro-credit {
     position: absolute;
-    bottom: 5rem;
-    left: 6rem;
-    z-index: 10;
+    top: 2.2rem;
+    left: 4rem;
+    z-index: 1000;
+    text-align: left;
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(-10px);
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 #scene-1.active .intro-credit {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: 3.2s;
+    transition-delay: 1.8s;
 }
 
 .intro-credit-label {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     font-weight: 700;
     color: #333;
     margin-bottom: 0.2rem;
 }
 
 .intro-credit-year {
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     font-weight: 600;
     color: #555;
 }
@@ -523,7 +443,7 @@ h4,
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--text-color);
     opacity: 0;
@@ -3213,8 +3133,17 @@ h4,
     }
 
     .scroll-indicator {
-        bottom: 1rem;
-        font-size: 1rem;
+        position: relative !important;
+        bottom: auto !important;
+        left: auto !important;
+        transform: none !important;
+        margin-top: 3.5rem;
+        font-size: 0.78rem;
+        align-self: center;
+    }
+
+    .mobile-only {
+        display: inline;
     }
 
     .huge-text {
@@ -3625,7 +3554,12 @@ h4,
 
     /* Mobile for Scene 1 Intro (redesigned) */
     .intro-content {
-        padding: 0 1.5rem;
+        padding: 6rem 1.5rem 3rem 1.5rem;
+        height: auto !important;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
     
     .intro-share-container {
@@ -3640,45 +3574,23 @@ h4,
         font-size: 0.85rem !important;
     }
 
-    .typography-title {
-        font-size: 2.8rem !important;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
+    #intro-title {
+        display: block;
+        width: 100%;
+        margin-bottom: 1rem;
     }
 
-    .title-right {
-        align-self: flex-end;
-    }
-
-    .char-space {
-        width: 0.8rem;
+    .intro-title-img {
+        max-width: 100%;
+        height: auto;
     }
 
     .intro-subtitle-box {
-        font-size: 0.88rem;
-        padding: 0.5rem 1rem;
+        font-size: 0.82rem;
+        padding: 0 !important;
         text-align: center;
-    }
-
-    .bg-deco {
-        opacity: 0.5 !important;
-    }
-
-    .deco-hand-bl {
-        width: 40vw;
-    }
-
-    .deco-hand-tr {
-        width: 30vw;
-    }
-
-    .deco-hand-br {
-        width: 32vw;
-    }
-
-    .deco-coin-full {
-        width: 100vw;
+        margin-top: 1.2rem !important;
+        margin-bottom: 0 !important;
     }
 
     .horizontal-bg-bar {
@@ -3687,16 +3599,18 @@ h4,
     }
 
     .intro-credit {
+        position: absolute;
+        top: 1.2rem;
         left: 1.5rem;
-        bottom: 4rem;
+        margin-top: 0;
     }
 
     .intro-credit-label {
-        font-size: 0.8rem;
+        font-size: 0.72rem;
     }
 
     .intro-credit-year {
-        font-size: 0.75rem;
+        font-size: 0.66rem;
     }
 
     /* Outro Scene Mobile Additions */
