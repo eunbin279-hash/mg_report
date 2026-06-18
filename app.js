@@ -503,7 +503,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (widthVal) {
                         setTimeout(() => {
                             seg.style.width = `${widthVal}%`;
-                        }, 400);
+                        }, 3900);
                     }
                 });
 

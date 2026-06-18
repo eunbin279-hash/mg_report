@@ -1041,6 +1041,7 @@ h4,
 /* --- Scene 5: Bridge --- */
 .bridge-scene {
     background-color: var(--dark-panel);
+    height: 100vh;
 }
 
 .bridge-scene .huge-text.init-fade-in {
@@ -2388,7 +2389,7 @@ h4,
 .contract-partner-stats.animate-active {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: 0.2s;
+    transition-delay: 3.5s;
 }
 
 .stats-text {
