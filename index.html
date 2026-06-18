@@ -10,36 +10,36 @@
 </head>
 
 <body>
-    <!-- Scene 1 -->
-    <section id="scene-1" class="scene intro-scene">
-        <!-- 우측 상단 공유하기 영역 -->
-        <div class="intro-share-container">
-            <button class="share-mail-btn" aria-label="연락처 보기" id="share-mail-btn">
-                <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="1.8" fill="none"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
-            </button>
-            <button class="share-txt-btn" id="share-txt-btn">공유하기</button>
-        </div>
+    <!-- 우측 상단 공유하기 영역 -->
+    <div class="intro-share-container">
+        <button class="share-mail-btn" aria-label="연락처 보기" id="share-mail-btn">
+            <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="1.8" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+        </button>
+        <button class="share-txt-btn" id="share-txt-btn">공유하기</button>
+    </div>
 
-        <!-- 연락처 팝업 -->
-        <div class="contact-popup" id="contact-popup">
-            <div class="contact-popup-content">
-                <button class="contact-popup-close" id="contact-popup-close">&times;</button>
-                <h3 class="contact-popup-title">Contact</h3>
-                <div class="contact-popup-item">
-                    <span class="contact-label">Instagram</span>
-                    <a href="https://instagram.com/archibinn" target="_blank" class="contact-value">@archibinn</a>
-                </div>
-                <div class="contact-popup-item">
-                    <span class="contact-label">E-mail</span>
-                    <a href="mailto:eunbin279@gmail.com" class="contact-value">eunbin279@gmail.com</a>
-                </div>
+    <!-- 연락처 팝업 -->
+    <div class="contact-popup" id="contact-popup">
+        <div class="contact-popup-content">
+            <button class="contact-popup-close" id="contact-popup-close">&times;</button>
+            <h3 class="contact-popup-title">Contact</h3>
+            <div class="contact-popup-item">
+                <span class="contact-label">Instagram</span>
+                <a href="https://instagram.com/archibinn" target="_blank" class="contact-value">@archibinn</a>
+            </div>
+            <div class="contact-popup-item">
+                <span class="contact-label">E-mail</span>
+                <a href="mailto:eunbin279@gmail.com" class="contact-value">eunbin279@gmail.com</a>
             </div>
         </div>
+    </div>
 
+    <!-- Scene 1 -->
+    <section id="scene-1" class="scene intro-scene">
         <!-- 핑크 배경 그래픽 (hand_dp.png & coin_dp.svg) -->
         <div class="intro-bg-graphics">
             <!-- 왼쪽 아래 손 -->
@@ -247,7 +247,7 @@
     </section>
 
     <!-- Scene 5 -->
-    <section id="scene-5" class="scene bridge-scene">
+    <section id="scene-5" class="scene bridge-scene dark-scene">
         <div class="content-wrapper">
             <h2 class="huge-text highlight-red">근데 왜 작가에겐<br>빚이 생기는 걸까?</h2>
         </div>
@@ -658,7 +658,7 @@
     </section>
 
     <!-- Scene 8 -->
-    <section id="scene-8" class="scene outro-scene locked">
+    <section id="scene-8" class="scene outro-scene locked dark-scene">
         <div class="content-wrapper outro-wrapper">
             <!-- 불공정 계약 실태 대시보드 추가 -->
             <!-- 출처: 2025 웹툰산업 실태조사 246페이지 (5) 서면 계약 체결 여부), 287페이지 (가. 웹툰 작가의 불공정 계약/행위 경험 여부) -->

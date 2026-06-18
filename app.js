@@ -743,6 +743,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Observer to toggle theme on the fixed share/contact button container depending on whether a dark section is in view
+    const darkScenes = document.querySelectorAll('.dark-scene');
+    const shareContainer = document.querySelector('.intro-share-container');
+    if (darkScenes.length > 0 && shareContainer) {
+        const intersectingDarkScenes = new Set();
+        const darkObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    intersectingDarkScenes.add(entry.target);
+                } else {
+                    intersectingDarkScenes.delete(entry.target);
+                }
+            });
+            
+            if (intersectingDarkScenes.size > 0) {
+                shareContainer.classList.add('on-dark');
+            } else {
+                shareContainer.classList.remove('on-dark');
+            }
+        }, { threshold: 0.15 });
+        darkScenes.forEach(scene => darkObserver.observe(scene));
+    }
+
     // Register all elements to observe
     const animatedElements = document.querySelectorAll('.init-fade-in, .split-ratio-bar-wrapper, .contract-partner-stats');
     animatedElements.forEach(el => statsObserver.observe(el));
