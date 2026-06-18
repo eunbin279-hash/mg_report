@@ -1903,17 +1903,17 @@ h4,
     position: absolute;
     top: calc(100% + 12px);
     left: 0;
-    width: 640px;
+    width: 580px;
     max-width: 90vw;
-    background: #FFFFFF;
-    border: 2px solid #1D1D1D;
-    border-radius: 24px;
-    padding: 2rem;
+    background: #F4F4F6;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 1.5rem;
     margin-top: 0;
     margin-left: 0;
     margin-right: 0;
     z-index: 1000;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
     transform-origin: top left;
 }
 
@@ -1924,14 +1924,17 @@ h4,
 }
 
 .statistics-container.hover-popup .stat-main-desc {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     line-height: 1.6;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
+    color: #4A4A4F;
 }
 
 .statistics-container.hover-popup .chart-wrapper {
-    padding: 1.5rem;
+    padding: 1.2rem;
     margin-bottom: 0;
+    background: #EAEAEF;
+    border-radius: 12px;
 }
 
 @keyframes popupFadeIn {
@@ -2559,7 +2562,7 @@ h4,
 }
 
 .w-stat-num {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: normal;
     color: var(--warning-color);
     margin-bottom: 0.4rem;
@@ -2695,8 +2698,8 @@ h4,
 }
 
 .case-desc {
-    font-family: 'BelovedMyoeunttobak', 'NanumSquare', sans-serif;
-    font-size: 1.15rem;
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 1.05rem;
     line-height: 1.6;
     color: #DDD;
     word-break: keep-all;
@@ -3044,10 +3047,32 @@ h4,
     }
 
     .character-intro-container {
-        flex-direction: column;
-        gap: 2rem;
-        align-items: center;
-        /* 캐릭터 가운데 정렬 */
+        flex-direction: row !important;
+        gap: 1rem !important;
+        align-items: stretch !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .character {
+        flex: 1 1 0% !important;
+        max-width: 180px !important;
+        min-width: 0 !important;
+    }
+
+    .char-info {
+        padding: 0.8rem 0.5rem !important;
+    }
+
+    .char-info h3 {
+        font-size: 1rem !important;
+        margin-bottom: 0.2rem !important;
+    }
+
+    .char-info p {
+        font-size: 0.75rem !important;
+        line-height: 1.2 !important;
+        word-break: keep-all;
     }
 
     .chat-container {
@@ -3071,7 +3096,7 @@ h4,
     }
 
     .char-full-img {
-        height: 200px;
+        height: 150px !important;
     }
 
     .intro-cookie-container {
@@ -3445,7 +3470,7 @@ h4,
     }
 
     .w-stat-num {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
     }
 
     .w-stat-label {
@@ -3803,28 +3828,83 @@ h4,
         margin-top: 0.8rem !important;
     }
 
+    /* Bridge scene (Scene 5) fullscreen black background fix on mobile */
+    .bridge-scene {
+        min-height: 100vh !important;
+        height: 100vh !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        background-color: var(--dark-panel) !important;
+    }
+
     /* Fix actual contract type hover popup overlay on mobile */
     .statistics-container.hover-popup {
         position: fixed !important;
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
-        width: 90% !important;
-        max-width: 450px !important;
+        width: 88% !important;
+        max-width: 380px !important;
         max-height: 80vh !important;
         overflow-y: auto !important;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4) !important;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15) !important;
         z-index: 10000 !important;
-        border: 2px solid #1D1D1D !important;
-        background: #FFFFFF !important;
-        padding: 1.5rem !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        background: #F4F4F6 !important;
+        padding: 1.2rem !important;
         margin: 0 !important;
+    }
+
+    .statistics-container.hover-popup .stat-main-desc {
+        font-size: 0.85rem !important;
+        line-height: 1.4 !important;
+        margin-bottom: 0.8rem !important;
+        color: #555555 !important;
+    }
+
+    .statistics-container.hover-popup .chart-wrapper {
+        padding: 0.8rem !important;
+        background: #EAEAEF !important;
+        border-radius: 10px !important;
+        margin-bottom: 2.8rem !important;
+    }
+
+    .statistics-container.hover-popup .chart-header {
+        font-size: 0.8rem !important;
+    }
+
+    .statistics-container.hover-popup .multi-bar-chart {
+        height: 40px !important;
+    }
+
+    .statistics-container.hover-popup .segment-label,
+    .statistics-container.hover-popup .sub-label {
+        font-size: 0.7rem !important;
+    }
+
+    .statistics-container.hover-popup .chart-legend-box {
+        margin-top: 0.8rem !important;
+        gap: 0.8rem !important;
+    }
+
+    .statistics-container.hover-popup .legend-item {
+        font-size: 0.75rem !important;
+    }
+
+    .statistics-container.hover-popup .sub-segments {
+        bottom: -35px !important;
+        height: 24px !important;
     }
 
     .close-tip {
         display: block !important;
         font-size: 0.8rem !important;
-        color: #999 !important;
+        color: #888 !important;
         text-align: center !important;
         margin-top: 1rem !important;
         font-family: 'NanumSquare', sans-serif !important;
