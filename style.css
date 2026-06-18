@@ -706,19 +706,27 @@ h4,
 }
 
 .bubble-concept-desc {
-    margin-top: 0.8rem;
-    padding-top: 0.8rem;
-    border-top: 1px dashed rgba(0, 0, 0, 0.12);
-    font-size: 0.82rem;
-    color: rgba(0, 0, 0, 0.7);
+    font-size: 0.85rem;
+    color: #555;
     font-family: 'NanumSquare', sans-serif;
-    line-height: 1.45;
+    line-height: 1.5;
     text-align: left;
     word-break: keep-all;
 }
 
+.pro-msg .bubble.bubble-concept-desc {
+    background: #FFF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    border-top-right-radius: 12px;
+    padding: 1rem 1.2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    margin-top: 0.6rem;
+    color: #555;
+}
+
 .bubble-concept-desc p {
-    margin: 0.4rem 0 0 0;
+    margin: 0.5rem 0 0 0;
 }
 
 .bubble-concept-desc p:first-child {
@@ -726,7 +734,7 @@ h4,
 }
 
 .bubble-concept-desc strong {
-    color: rgba(0, 0, 0, 0.9);
+    color: #2D2D2D;
     font-weight: 700;
 }
 
@@ -1158,6 +1166,7 @@ h4,
     font-family: 'BelovedMyoeunttobak', sans-serif;
     transform: rotate(-15deg);
     opacity: 0.7;
+    animation: stampPulse 2s infinite ease-in-out;
 }
 
 .contract-card:hover .stamp-btn,
@@ -1166,6 +1175,7 @@ h4,
     color: white;
     transform: rotate(0) scale(1.1);
     opacity: 1;
+    animation: none;
 }
 
 /* Modal */
@@ -1188,15 +1198,30 @@ h4,
 
 .modal-content {
     background: var(--card-bg);
-    padding: 3rem 2rem 2.5rem 2rem;
-    border-radius: 20px;
-    max-width: 600px;
+    padding: 3rem 2.5rem 2.5rem 2.5rem;
+    border-radius: 24px;
+    max-width: 550px;
     width: 90%;
     max-height: 90vh;
     overflow-y: auto;
     text-align: center;
     position: relative;
-    border: 5px solid var(--warning-color);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-top: 8px solid #CCC; /* default fallback */
+    transition: border-color 0.3s ease;
+}
+
+.modal-content.type-danger {
+    border-top-color: var(--warning-color); /* #E74C3C */
+}
+
+.modal-content.type-warning {
+    border-top-color: var(--accent-color); /* #FF8A00 */
+}
+
+.modal-content.type-success {
+    border-top-color: #27AE60;
 }
 
 .close-btn {
@@ -1205,26 +1230,62 @@ h4,
     right: 1.5rem;
     font-size: 2rem;
     cursor: pointer;
-    color: #999;
+    color: #BBB;
+    transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+    color: #666;
 }
 
 .alert-title {
-    font-size: 2.5rem;
-    color: var(--warning-color);
-    margin-bottom: 1rem;
+    font-size: 2.2rem;
+    color: #2D2D2D;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.modal-subtitle {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #666;
+    margin-top: 0.5rem;
+    font-family: 'NanumSquare', sans-serif;
 }
 
 .modal-desc {
-    font-size: 1.2rem;
-    line-height: 1.6;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: #555;
+    text-align: left;
+    background: #FFF9F2;
+    border-left: 4px solid var(--accent-color);
+    padding: 1.2rem;
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 1.5rem;
+    word-break: keep-all;
+}
+
+.modal-content.type-danger .modal-desc {
+    background: #FFF5F5;
+    border-left-color: var(--warning-color);
+}
+
+.modal-content.type-success .modal-desc {
+    background: #F5FAF6;
+    border-left-color: #27AE60;
 }
 
 .debt-counter {
-    font-size: 3rem;
-    font-weight: 900;
+    font-size: 2.2rem;
+    font-weight: 800;
     color: var(--warning-color);
     margin-top: 2rem;
     font-variant-numeric: tabular-nums;
+    font-family: 'NostalgicKiteDrifting', 'NanumSquare', sans-serif;
+    white-space: nowrap;
 }
 
 .warning-anim {
@@ -1611,35 +1672,54 @@ h4,
 .calc-list {
     text-align: left;
     list-style: none;
-    margin-bottom: 2rem;
-    background: rgba(0, 0, 0, 0.05);
-    padding: 1.5rem;
-    border-radius: 10px;
+    margin: 1.5rem 0 2rem 0;
+    background: #F9F9FB;
+    padding: 1.5rem 1.8rem;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .calc-list li {
-    font-size: 1.1rem;
+    font-size: 1.02rem;
     margin-bottom: 0.8rem;
-    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
-    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    padding-bottom: 0.7rem;
+    color: #4A4A4A;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calc-list li strong {
+    font-weight: 700;
+    color: #2D2D2D;
 }
 
 .calc-list li:last-child {
     border-bottom: none;
     margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .calc-result {
-    font-size: 1.3rem !important;
+    font-size: 1.2rem !important;
     font-weight: 800;
-    margin-top: 1rem !important;
+    margin-top: 1.2rem !important;
+    display: block !important;
+    text-align: center;
+    padding: 0.8rem 1rem !important;
+    border-radius: 10px;
 }
 
-.error-text {
+.calc-result.error-text {
+    background: rgba(231, 76, 60, 0.06);
+    border: 1px solid rgba(231, 76, 60, 0.1);
     color: var(--warning-color);
 }
 
-.success-text {
+.calc-result.success-text {
+    background: rgba(39, 174, 96, 0.06);
+    border: 1px solid rgba(39, 174, 96, 0.1);
     color: #27AE60;
 }
 
@@ -2251,11 +2331,10 @@ h4,
     transition: all 1s ease;
 }
 
-/* 플랫폼, 에이전시 단어 정의가 완전히 나타난 3초 후에 등장 */
-.split-active ~ .contract-partner-stats {
+.contract-partner-stats.animate-active {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: 4.2s;
+    transition-delay: 0.2s;
 }
 
 .stats-text {
@@ -3553,4 +3632,57 @@ h4,
     .advice-char-img {
         height: 220px;
     }
+}
+
+/* Locking and Shaking Effects for Scene 6 Contracts */
+.scene.locked {
+    display: none !important;
+}
+
+@keyframes stampPulse {
+    0% {
+        transform: rotate(-15deg) scale(1);
+        box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4);
+    }
+    70% {
+        transform: rotate(-15deg) scale(1.08);
+        box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
+    }
+    100% {
+        transform: rotate(-15deg) scale(1);
+        box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+    }
+}
+
+.next-step-guide {
+    text-align: center;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--warning-color);
+    margin-top: 2rem;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    font-family: 'NanumSquare', sans-serif;
+}
+
+@keyframes cardShake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+
+.contract-card.shake-attention {
+    animation: cardShake 0.5s ease-in-out;
+    border-color: var(--warning-color) !important;
+    box-shadow: 0 0 15px rgba(231, 76, 60, 0.2) !important;
+}
+
+@keyframes textShake {
+    0%, 100% { transform: scale(1); }
+    20%, 60% { transform: scale(1.05); }
+    40%, 80% { transform: scale(0.95); }
+}
+
+.next-step-guide.shake-text {
+    animation: textShake 0.5s ease-in-out;
 }

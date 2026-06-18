@@ -151,6 +151,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* --- Scene 6: Contract Simulation Game --- */
+    let isScene6Active = false;
+    let isContractSelected = false;
     const cards = document.querySelectorAll('.contract-card .select-btn');
     const modal = document.getElementById('result-modal');
     const closeBtn = document.querySelector('.close-btn');
@@ -164,13 +166,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const scenarios = {
         'A': {
-            title: '계약 A 결과 (가정: 매출 500만원 발생)',
+            title: '계약 A 결과 <span class="modal-subtitle">(매출 500만원)</span>',
             calcHTML: `
                 <ul class="calc-list">
-                    <li><strong>총 매출:</strong> 5,000,000원</li>
-                    <li><strong>플랫폼 수수료(30%) 공제 (후차감):</strong> 남은 3,500,000원</li>
-                    <li><strong>에이전시/작가 수익 분배 (5:5):</strong> 1,750,000원</li>
-                    <li><strong>선지급된 보장금 (월 400만원) 차감:</strong> 1,750,000원 - 4,000,000원</li>
+                    <li><strong>총 매출</strong> 5,000,000원</li>
+                    <li><strong>플랫폼 수수료(30%) 공제 (후차감)</strong> 남은 3,500,000원</li>
+                    <li><strong>에이전시/작가 수익 분배 (5:5)</strong> 1,750,000원</li>
+                    <li><strong>선지급된 보장금 (월 400만원) 차감</strong> 1,750,000원 - 4,000,000원</li>
                     <li class="calc-result error-text">작가 추가 수익: 0원 (오히려 빚 225만원 발생)</li>
                 </ul>
             `,
@@ -178,12 +180,12 @@ document.addEventListener('DOMContentLoaded', () => {
             profit: -2250000
         },
         'B': {
-            title: '계약 B 결과 (가정: 매출 500만원 발생)',
+            title: '계약 B 결과 <span class="modal-subtitle">(매출 500만원)</span>',
             calcHTML: `
                 <ul class="calc-list">
-                    <li><strong>총 매출:</strong> 5,000,000원</li>
-                    <li><strong>보장금 최우선 차감 (선차감):</strong> 5,000,000원 - 2,000,000원 = 3,000,000원</li>
-                    <li><strong>남은 수익 분배 (작가 30%):</strong> 900,000원</li>
+                    <li><strong>총 매출</strong> 5,000,000원</li>
+                    <li><strong>보장금 최우선 차감 (선차감)</strong> 5,000,000원 - 2,000,000원 = 3,000,000원</li>
+                    <li><strong>남은 수익 분배 (작가 30%)</strong> 900,000원</li>
                     <li class="calc-result success-text">작가 추가 수익: 900,000원 (총 수익: 2,900,000원)</li>
                 </ul>
             `,
@@ -191,12 +193,12 @@ document.addEventListener('DOMContentLoaded', () => {
             profit: 2900000
         },
         'C': {
-            title: '계약 C 결과 (가정: 매출 500만원 발생)',
+            title: '계약 C 결과 <span class="modal-subtitle">(매출 500만원)</span>',
             calcHTML: `
                 <ul class="calc-list">
-                    <li><strong>총 매출:</strong> 5,000,000원</li>
-                    <li><strong>플랫폼 수수료 등 공제 후 순수익:</strong> 3,500,000원</li>
-                    <li><strong>수익 분배 (작가 70%):</strong> 2,450,000원</li>
+                    <li><strong>총 매출</strong> 5,000,000원</li>
+                    <li><strong>플랫폼 수수료 등 공제 후 순수익</strong> 3,500,000원</li>
+                    <li><strong>수익 분배 (작가 70%)</strong> 2,450,000원</li>
                     <li class="calc-result success-text">최종 작가 수익: 2,450,000원</li>
                 </ul>
             `,
@@ -246,6 +248,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cards.forEach(btn => {
         btn.addEventListener('click', (e) => {
+            isContractSelected = true;
+            document.querySelectorAll('.scene.locked').forEach(el => el.classList.remove('locked'));
+
+            const nextGuide = document.getElementById('next-step-guide');
+            if (nextGuide) {
+                nextGuide.innerText = "서명이 완료되었습니다! 아래로 스크롤하여 계속 진행하세요 ↓";
+                nextGuide.style.color = "#27AE60";
+            }
+
             const cardElement = e.target.closest('.contract-card');
             const platform = cardElement.getAttribute('data-platform');
             const data = scenarios[platform];
@@ -253,7 +264,19 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.contract-card').forEach(c => c.classList.remove('selected'));
             cardElement.classList.add('selected');
 
-            modalTitle.innerText = data.title;
+            const modalContent = modal.querySelector('.modal-content');
+            if (modalContent) {
+                modalContent.className = 'modal-content warning-anim';
+                if (platform === 'A') {
+                    modalContent.classList.add('type-danger');
+                } else if (platform === 'B') {
+                    modalContent.classList.add('type-warning');
+                } else {
+                    modalContent.classList.add('type-success');
+                }
+            }
+
+            modalTitle.innerHTML = data.title;
             modalDesc.innerText = data.desc;
             if (modalCalc) modalCalc.innerHTML = data.calcHTML;
             debtCounter.innerText = '0원';
@@ -377,6 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (scene6 && cardContainer) {
         const scene6Observer = new IntersectionObserver((entries) => {
+            isScene6Active = entries[0].isIntersecting;
             if (entries[0].isIntersecting && window.innerWidth <= 768 && !hasAutoScrolled) {
                 hasAutoScrolled = true;
                 setTimeout(() => {
@@ -393,6 +417,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { threshold: 0.5 });
         scene6Observer.observe(scene6);
     }
+
+    // Intercept scroll on Scene 6 if not signed
+    const handleScrollAttempt = (e) => {
+        if (isScene6Active && !isContractSelected) {
+            let isScrollingDown = false;
+            if (e.type === 'wheel') {
+                if (e.deltaY > 0) isScrollingDown = true;
+            } else if (e.type === 'touchmove') {
+                isScrollingDown = true; 
+            }
+
+            if (isScrollingDown) {
+                // Trigger shake effect on all cards to draw attention
+                const cardsElements = document.querySelectorAll('.contract-card');
+                cardsElements.forEach(card => {
+                    card.classList.add('shake-attention');
+                    setTimeout(() => {
+                        card.classList.remove('shake-attention');
+                    }, 600);
+                });
+
+                // Highlight the guide message
+                const nextGuide = document.getElementById('next-step-guide');
+                if (nextGuide) {
+                    nextGuide.classList.add('shake-text');
+                    nextGuide.style.color = '#E74C3C';
+                    setTimeout(() => {
+                        nextGuide.classList.remove('shake-text');
+                    }, 600);
+                }
+            }
+        }
+    };
+
+    window.addEventListener('wheel', handleScrollAttempt, { passive: true });
+    window.addEventListener('touchmove', handleScrollAttempt, { passive: true });
 
     // Outro Campaign Interactive Accordion Toggle
     const outroKeywordItems = document.querySelectorAll('.outro-campaign .keyword-item');
@@ -443,7 +503,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (widthVal) {
                         setTimeout(() => {
                             seg.style.width = `${widthVal}%`;
-                        }, 4400);
+                        }, 400);
                     }
                 });
 
