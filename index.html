@@ -40,31 +40,57 @@
 
     <!-- Scene 1 -->
     <section id="scene-1" class="scene intro-scene">
-        <!-- 수평 민트색 라인 -->
-        <div class="horizontal-bg-bar"></div>
+        <!-- 핑크 배경 그래픽 (coin_dp.svg) -->
+        <div class="intro-bg-graphics">
+            <!-- 코인 (전체 화면 배치) -->
+            <img src="assets/coin_dp.svg" alt="코인 그래픽" class="bg-deco deco-coin-full">
+        </div>
 
         <div class="content-wrapper intro-content">
 
-            <!-- 좌측 상단 제작 정보 -->
+
+            <!-- 민트 박스 부제 -->
+            <div class="intro-subtitle-box">
+                <p>웹툰 정산 제도의 정보 불균형 해결을 위한 인터랙티브 저널</p>
+            </div>
+
+            <div class="intro-title-wrapper">
+                <h1 class="main-title typography-title" id="intro-title">
+                    <div class="title-row row-1">
+                        <span class="char" style="--char-index: 1;">웹</span>
+                        <span class="char" style="--char-index: 2;">툰</span>
+                        <span class="char" style="--char-index: 3;">작</span>
+                        <span class="char" style="--char-index: 4;">가</span>
+                        <span class="char" style="--char-index: 5;">는</span>
+                    </div>
+                    <div class="title-row row-2">
+                        <span class="title-sub-row">
+                            <span class="char" style="--char-index: 6;">1</span>
+                            <span class="char" style="--char-index: 7;">년</span>
+                            <span class="char" style="--char-index: 8;">에</span>
+                        </span>
+                        <span class="char-space"></span>
+                        <span class="title-sub-row">
+                            <span class="char" style="--char-index: 9;">얼</span>
+                            <span class="char" style="--char-index: 10;">마</span>
+                        </span>
+                        <span class="char-space"></span>
+                        <span class="title-sub-row">
+                            <span class="char" style="--char-index: 11;">벌</span>
+                            <span class="char" style="--char-index: 12;">까</span>
+                            <span class="char" style="--char-index: 13;">?</span>
+                        </span>
+                    </div>
+                </h1>
+            </div>
+
+            <!-- 하단 제작 정보 -->
             <div class="intro-credit">
                 <p class="intro-credit-label">Designed by 노은빈</p>
                 <p class="intro-credit-year">2026.</p>
             </div>
 
-            <div class="intro-title-container">
-                <div class="intro-title-wrapper">
-                    <h1 class="main-title typography-title" id="intro-title">
-                        <img src="assets/mg_title.svg" alt="웹툰작가는 1년에 얼마 벌까?" class="intro-title-img">
-                    </h1>
-                </div>
-
-                <!-- 민트 박스 부제 -->
-                <div class="intro-subtitle-box">
-                    <p>웹툰 정산 제도의 <br class="mobile-only">정보 불균형 해결을 위한 <br class="mobile-only">인터랙티브 저널</p>
-                </div>
-            </div>
-
-            <div class="scroll-indicator intro-scroll">스크롤하여 알아보기 <span>↓</span></div>
+            <div class="scroll-indicator intro-scroll">스크롤해서 알아보기</div>
         </div>
     </section>
 
@@ -750,8 +776,8 @@
                         <img src="assets/pro_face.png" alt="프로 얼굴" class="chat-profile">
                         <div class="chat-bubbles">
                             <div class="bubble">당연히 있지.</div>
-                            <div class="bubble">첫번째로 앱 내 결제보다는 플랫폼 웹사이트에서 결제를 하는 게 좋아. 앱스토어에서 떼어가는 수수료가 없어서 상대적으로 작가에게
-                                돌아가는 수익이 증가하거든.</div>
+                            <div class="bubble">첫번째로 앱 내 결제보다는 <span class="motion-underline">플랫폼 웹사이트에서 결제</span>를 하는 게 좋아.</div>
+                            <div class="bubble">앱스토어에서 떼어가는 <span class="motion-underline">수수료가 없어서</span> 상대적으로 작가에게 돌아가는 <span class="motion-underline">수익이 증가</span>하거든.</div>
                         </div>
                     </div>
 
@@ -759,7 +785,8 @@
                     <div class="chat-message student-msg">
                         <img src="assets/student_face.png" alt="학생 얼굴" class="chat-profile">
                         <div class="chat-bubbles">
-                            <div class="bubble">헉! 이제부터는 웹사이트에서 충전하고 봐야겠어요! 또 있어요?!</div>
+                            <div class="bubble">헉! 이제부터는 <span class="motion-underline">웹사이트에서 충전</span>하고 봐야겠어요!</div>
+                            <div class="bubble">또 있어요?!</div>
                         </div>
                     </div>
 
@@ -767,8 +794,8 @@
                     <div class="chat-message pro-msg">
                         <img src="assets/pro_face.png" alt="프로 얼굴" class="chat-profile">
                         <div class="chat-bubbles">
-                            <div class="bubble">두번째로는 플랫폼 독점 작품이 완결되면 해당 플랫폼에서 소비하는 게 좋아. 이것도 같은 이유인데, 이중 수수료가 없어지거든.
-                            </div>
+                            <div class="bubble">두번째로는 플랫폼 독점 작품이 완결되면 <span class="motion-underline">해당 플랫폼에서 소비</span>하는 게 좋아.</div>
+                            <div class="bubble">이것도 같은 이유인데, <span class="motion-underline">이중 수수료가 없어지거든</span>.</div>
                         </div>
                     </div>
 
@@ -776,7 +803,7 @@
                     <div class="chat-message student-msg">
                         <img src="assets/student_face.png" alt="학생 얼굴" class="chat-profile">
                         <div class="chat-bubbles">
-                            <div class="bubble">이중 수수료… 위에서 본 것보다 작가의 몫이 훨씬 작아지기도 하겠네요…</div>
+                            <div class="bubble">이중 수수료… 위에서 본 것보다 <span class="motion-underline">작가의 몫이 훨씬 작아지기도</span> 하겠네요…</div>
                         </div>
                     </div>
 
@@ -784,7 +811,8 @@
                     <div class="chat-message pro-msg">
                         <img src="assets/pro_face.png" alt="프로 얼굴" class="chat-profile">
                         <div class="chat-bubbles">
-                            <div class="bubble">맞아. 그렇지만 가장 중요한 건 정식 사이트에서 감상하는 거야.</div>
+                            <div class="bubble">맞아.</div>
+                            <div class="bubble">그렇지만 가장 중요한 건 <span class="motion-underline">정식 사이트에서 감상</span>하는 거야.</div>
                         </div>
                     </div>
 
@@ -792,7 +820,8 @@
                     <div class="chat-message student-msg">
                         <img src="assets/student_face.png" alt="학생 얼굴" class="chat-profile">
                         <div class="chat-bubbles">
-                            <div class="bubble">이건 저도 알아요! 불법복제사이트 근절 캠페인도 했었잖아요.</div>
+                            <div class="bubble">이건 저도 알아요!</div>
+                            <div class="bubble"><span class="motion-underline">불법복제사이트 근절</span> 캠페인도 했었잖아요.</div>
                         </div>
                     </div>
 
@@ -800,8 +829,10 @@
                     <div class="chat-message pro-msg">
                         <img src="assets/pro_face.png" alt="프로 얼굴" class="chat-profile">
                         <div class="chat-bubbles">
-                            <div class="bubble">그래. 불법 복제 사이트는 전체 수익 자체를 완전히 떨어뜨려. 불법 유출을 2주만 늦춰도 유료 결제액이 평균 23% 증가한다고
-                                해. 일부는 무려 60% 증가했지.</div>
+                            <div class="bubble">그래.</div>
+                            <div class="bubble"><span class="motion-underline">불법 복제 사이트</span>는 전체 수익 자체를 완전히 떨어뜨려.</div>
+                            <div class="bubble"><span class="motion-underline">불법 유출을 2주만 늦춰도</span> 유료 결제액이 <span class="motion-underline">평균 23% 증가</span>한다고 해.</div>
+                            <div class="bubble">일부는 무려 <span class="motion-underline">60% 증가</span>했지.</div>
                             <span class="chat-source-tag">출처: 네이버웹툰, 툰레이더
                                 (https://www.navercorp.com/media/pressReleasesDetail?seq=34955)</span>
                         </div>
@@ -813,7 +844,7 @@
                             <img src="assets/friend_face.png" alt="작가 친구 얼굴" class="chat-profile">
                         </div>
                         <div class="chat-bubbles">
-                            <div class="bubble">그리고 최근에 국내 최대 불법 사이트가 검거됐을 때, 내 정산이 이전 달보다 3배가 늘었다니까?</div>
+                            <div class="bubble">그리고 최근에 <span class="motion-underline">국내 최대 불법 사이트가 검거</span>됐을 때, 내 정산이 이전 달보다 <span class="motion-underline">3배가 늘었다니까</span>?</div>
                             <span class="chat-source-tag">출처: 장윤우, 헤럴드경제
                                 (https://biz.heraldcorp.com/article/10762580)</span>
                         </div>
@@ -839,7 +870,8 @@
                     <div class="chat-message student-msg">
                         <img src="assets/student_face.png" alt="학생 얼굴" class="chat-profile">
                         <div class="chat-bubbles">
-                            <div class="bubble">아하! 근데 수익이 3배나 늘었다고요?</div>
+                            <div class="bubble">아하!</div>
+                            <div class="bubble">근데 <span class="motion-underline">수익이 3배</span>나 늘었다고요?</div>
                         </div>
                     </div>
 
@@ -847,8 +879,9 @@
                     <div class="chat-message friend-msg">
                         <img src="assets/friend_face.png" alt="작가 친구 얼굴" class="chat-profile">
                         <div class="chat-bubbles">
-                            <div class="bubble">응. 단순히 우연일 수도 있고 일시적인 걸 수도 있지만 불법복제사이트는 없어지는 게 옳아. 이 웹툰 산업 자체를 저해하거든.
-                            </div>
+                            <div class="bubble">응.</div>
+                            <div class="bubble">단순히 우연일 수도 있고 일시적인 걸 수도 있지만 <span class="motion-underline">불법복제사이트는 없어지는 게</span> 옳아.</div>
+                            <div class="bubble">이 <span class="motion-underline">웹툰 산업 자체를 저해</span>하거든.</div>
                         </div>
                     </div>
 
@@ -856,7 +889,7 @@
                     <div class="chat-message student-msg">
                         <img src="assets/student_face.png" alt="학생 얼굴" class="chat-profile">
                         <div class="chat-bubbles">
-                            <div class="bubble">좋은 작품을 오래오래 보려면 이것들을 꼭 지켜야겠네요!!</div>
+                            <div class="bubble">좋은 작품을 오래오래 보려면 <span class="motion-underline">이것들을 꼭 지켜야겠네요</span>!!</div>
                         </div>
                     </div>
                 </div>
