@@ -133,16 +133,46 @@ document.addEventListener('DOMContentLoaded', () => {
     /* --- Scene 4: Scroll Animation (Split Cookie) --- */
     const scene4 = document.getElementById('scene-4');
     const splitContainer = document.getElementById('split-cookie-container');
+    const partnerStats = document.querySelector('.contract-partner-stats');
+    let partnerChartTimeout = null;
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 // Add a small delay for dramatic effect
                 setTimeout(() => {
                     splitContainer.classList.add('split-active');
+                    
+                    // Trigger partner stats bar animation sequentially
+                    if (partnerStats) {
+                        const isMobile = window.innerWidth <= 768;
+                        const delayBeforeShowing = isMobile ? 1800 : 3200; 
+                        
+                        partnerStats.classList.add('animate-active');
+                        
+                        if (partnerChartTimeout) clearTimeout(partnerChartTimeout);
+                        partnerChartTimeout = setTimeout(() => {
+                            const partnerSegments = partnerStats.querySelectorAll('.partner-segment');
+                            partnerSegments.forEach(seg => {
+                                const widthVal = seg.getAttribute('data-width');
+                                if (widthVal) {
+                                    seg.style.width = `${widthVal}%`;
+                                }
+                            });
+                        }, delayBeforeShowing + 400); // animate bars right after card fades in
+                    }
                 }, 500);
             } else {
                 // Remove class when out of view to re-trigger animation when scrolling back
                 splitContainer.classList.remove('split-active');
+                if (partnerStats) {
+                    partnerStats.classList.remove('animate-active');
+                    const partnerSegments = partnerStats.querySelectorAll('.partner-segment');
+                    partnerSegments.forEach(seg => {
+                        seg.style.width = '0%';
+                    });
+                }
+                if (partnerChartTimeout) clearTimeout(partnerChartTimeout);
             }
         });
     }, { threshold: 0.15 });
@@ -520,17 +550,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
-                // 1-2. Scene 4 Partner Ratio Bar Animation
-                const partnerSegments = target.querySelectorAll('.partner-segment');
-                partnerSegments.forEach(seg => {
-                    const widthVal = seg.getAttribute('data-width');
-                    if (widthVal) {
-                        setTimeout(() => {
-                            seg.style.width = `${widthVal}%`;
-                        }, 900);
-                    }
-                });
-
                 // 2. Scene 7 Split Ratio Bar Animation
                 const ratioSegments = target.querySelectorAll('.ratio-segment');
                 ratioSegments.forEach(seg => {
@@ -886,6 +905,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: false });
 
     // Register all elements to observe
-    const animatedElements = document.querySelectorAll('.init-fade-in, .split-ratio-bar-wrapper, .contract-partner-stats');
+    const animatedElements = document.querySelectorAll('.init-fade-in, .split-ratio-bar-wrapper');
     animatedElements.forEach(el => statsObserver.observe(el));
 });

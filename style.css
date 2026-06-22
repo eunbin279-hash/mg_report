@@ -1059,7 +1059,7 @@ h4,
 .split-active~.sub-text {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: 2.5s;
+    transition-delay: 2.2s;
 }
 
 .role-definitions {
@@ -1101,7 +1101,7 @@ h4,
 .split-active~.role-definitions {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: 3s;
+    transition-delay: 2.7s;
 }
 
 /* --- Scene 5: Bridge --- */
@@ -2464,7 +2464,7 @@ h4,
 .contract-partner-stats.animate-active {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: 0.5s;
+    transition-delay: 3.2s;
 }
 
 .stats-text {
@@ -3744,18 +3744,18 @@ h4,
     }
 
     .typography-title {
-        font-size: 3.2rem !important;
+        font-size: 4.0rem !important;
         flex-direction: column;
         align-items: center;
         /* Center aligned */
-        gap: 0.1rem;
+        gap: 1.2rem;
         text-align: center;
     }
 
     .title-row.row-2 {
         flex-direction: column !important;
         align-items: center !important;
-        gap: 0.3rem !important;
+        gap: 1.2rem !important;
     }
 
     .title-row.row-2::after {
@@ -4206,5 +4206,18 @@ h4,
     .guide-char-bubble {
         font-size: 0.7rem !important;
         padding: 0.35rem 0.7rem !important;
+    }
+
+    /* Scene 4 Mobile Transitions */
+    .split-active~.sub-text {
+        transition-delay: 1.0s !important;
+    }
+
+    .split-active~.role-definitions {
+        transition-delay: 1.4s !important;
+    }
+
+    .contract-partner-stats.animate-active {
+        transition-delay: 1.8s !important;
     }
 }
