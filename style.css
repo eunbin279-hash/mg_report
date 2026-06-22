@@ -786,7 +786,7 @@ h4,
 }
 
 .bubble-concept-desc {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: #555;
     font-family: 'NanumSquare', sans-serif;
     line-height: 1.5;
@@ -2464,7 +2464,7 @@ h4,
 .contract-partner-stats.animate-active {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: 3.5s;
+    transition-delay: 0.5s;
 }
 
 .stats-text {
@@ -3291,6 +3291,10 @@ h4,
         word-break: keep-all;
     }
 
+    .bubble-concept-desc {
+        font-size: 0.75rem !important;
+    }
+
     .char-full-img {
         height: 150px !important;
     }
@@ -3909,13 +3913,13 @@ h4,
     }
 
     .light-scene .action-card h4 {
-        font-size: 0.95rem;
+        font-size: 1.1rem;
         margin-bottom: 0.6rem;
     }
 
     .light-scene .action-card p {
-        font-size: 0.78rem;
-        line-height: 1.4;
+        font-size: 0.88rem;
+        line-height: 1.45;
     }
 
     .advice-container {

@@ -249,6 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cards.forEach(btn => {
         btn.addEventListener('click', (e) => {
             isContractSelected = true;
+            stopCardAutoScroll();
             document.querySelectorAll('.scene.locked').forEach(el => el.classList.remove('locked'));
 
             const nextGuide = document.getElementById('next-step-guide');
@@ -396,26 +397,49 @@ document.addEventListener('DOMContentLoaded', () => {
     // Auto scroll for contracts on mobile (Scene 6)
     const scene6 = document.getElementById('scene-6');
     const cardContainer = document.querySelector('.card-container');
-    let hasAutoScrolled = false;
+    let cardScrollInterval = null;
+    let currentCardIndex = 0;
+    
+    function startCardAutoScroll() {
+        if (cardScrollInterval) clearInterval(cardScrollInterval);
+        cardScrollInterval = setInterval(() => {
+            if (!isScene6Active || isContractSelected) return;
+            const cardsList = cardContainer.querySelectorAll('.contract-card');
+            if (cardsList.length === 0) return;
+            currentCardIndex = (currentCardIndex + 1) % cardsList.length;
+            const targetCard = cardsList[currentCardIndex];
+            if (targetCard) {
+                const scrollPos = targetCard.offsetLeft - cardContainer.offsetLeft - 15;
+                cardContainer.scrollTo({
+                    left: scrollPos,
+                    behavior: 'smooth'
+                });
+            }
+        }, 3000);
+    }
+
+    function stopCardAutoScroll() {
+        if (cardScrollInterval) {
+            clearInterval(cardScrollInterval);
+            cardScrollInterval = null;
+        }
+    }
     
     if (scene6 && cardContainer) {
         const scene6Observer = new IntersectionObserver((entries) => {
             isScene6Active = entries[0].isIntersecting;
-            if (entries[0].isIntersecting && window.innerWidth <= 768 && !hasAutoScrolled) {
-                hasAutoScrolled = true;
-                setTimeout(() => {
-                    const secondCard = cardContainer.querySelectorAll('.contract-card')[1];
-                    if (secondCard) {
-                        const scrollPos = secondCard.offsetLeft - cardContainer.offsetLeft - 15;
-                        cardContainer.scrollTo({
-                            left: scrollPos,
-                            behavior: 'smooth'
-                        });
-                    }
-                }, 3000);
+            if (entries[0].isIntersecting && window.innerWidth <= 768) {
+                currentCardIndex = 0;
+                startCardAutoScroll();
+            } else {
+                stopCardAutoScroll();
             }
         }, { threshold: 0.5 });
         scene6Observer.observe(scene6);
+
+        // Pause auto scroll if user touches or mouse-downs to interact manually
+        cardContainer.addEventListener('touchstart', stopCardAutoScroll, { passive: true });
+        cardContainer.addEventListener('mousedown', stopCardAutoScroll);
     }
 
     // Intercept scroll on Scene 6 if not signed
@@ -503,7 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (widthVal) {
                         setTimeout(() => {
                             seg.style.width = `${widthVal}%`;
-                        }, 3900);
+                        }, 900);
                     }
                 });
 
@@ -765,6 +789,101 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { threshold: 0.15 });
         darkScenes.forEach(scene => darkObserver.observe(scene));
     }
+
+    // Bridge scene (Scene 5) scroll-lock with elastic bounce
+    let isBridgeLocked = false;
+    let hasBridgeLockedThisEntry = false;
+    let bridgeLockTimer = null;
+    let accumulatedDelta = 0;
+    
+    const bridgeScene = document.getElementById('scene-5');
+    const bridgeContent = bridgeScene ? bridgeScene.querySelector('.content-wrapper') : null;
+    
+    if (bridgeContent) {
+        bridgeContent.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)';
+    }
+    
+    if (bridgeScene) {
+        const bridgeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (!hasBridgeLockedThisEntry) {
+                        isBridgeLocked = true;
+                        hasBridgeLockedThisEntry = true;
+                        
+                        if (bridgeLockTimer) clearTimeout(bridgeLockTimer);
+                        bridgeLockTimer = setTimeout(() => {
+                            isBridgeLocked = false;
+                        }, 1500); // 1.5 seconds lock
+                    }
+                } else {
+                    hasBridgeLockedThisEntry = false;
+                    isBridgeLocked = false;
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        bridgeObserver.observe(bridgeScene);
+    }
+    
+    window.addEventListener('wheel', (e) => {
+        if (isBridgeLocked) {
+            e.preventDefault();
+            accumulatedDelta += e.deltaY;
+            const limit = 50;
+            let shift = (accumulatedDelta / 10);
+            if (shift > limit) shift = limit;
+            if (shift < -limit) shift = -limit;
+            
+            if (bridgeContent) {
+                bridgeContent.style.transition = 'none';
+                bridgeContent.style.transform = `translateY(${-shift}px)`;
+            }
+            
+            clearTimeout(window.bridgeResetTimer);
+            window.bridgeResetTimer = setTimeout(() => {
+                if (bridgeContent) {
+                    bridgeContent.style.transition = 'transform 0.6s cubic-bezier(0.25, 1.5, 0.5, 1)';
+                    bridgeContent.style.transform = 'translateY(0)';
+                }
+                accumulatedDelta = 0;
+            }, 100);
+        }
+    }, { passive: false });
+
+    let touchStartY = 0;
+    window.addEventListener('touchstart', (e) => {
+        if (isBridgeLocked) {
+            touchStartY = e.touches[0].clientY;
+        }
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+        if (isBridgeLocked) {
+            const currentY = e.touches[0].clientY;
+            const diffY = touchStartY - currentY;
+            
+            e.preventDefault();
+            
+            const limit = 40;
+            let shift = diffY * 0.3;
+            if (shift > limit) shift = limit;
+            if (shift < -limit) shift = -limit;
+            
+            if (bridgeContent) {
+                bridgeContent.style.transition = 'none';
+                bridgeContent.style.transform = `translateY(${-shift}px)`;
+            }
+            
+            clearTimeout(window.bridgeResetTimer);
+            window.bridgeResetTimer = setTimeout(() => {
+                if (bridgeContent) {
+                    bridgeContent.style.transition = 'transform 0.6s cubic-bezier(0.25, 1.5, 0.5, 1)';
+                    bridgeContent.style.transform = 'translateY(0)';
+                }
+            }, 100);
+        }
+    }, { passive: false });
 
     // Register all elements to observe
     const animatedElements = document.querySelectorAll('.init-fade-in, .split-ratio-bar-wrapper, .contract-partner-stats');
