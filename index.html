@@ -971,6 +971,27 @@
                     </div>
                 </div>
 
+                <!-- 독자의 말 방명록 영역 -->
+                <div class="reader-messages-section init-fade-in">
+                    <h3 class="scene8-sub-title" style="margin-top: 5rem; margin-bottom: 1rem;">💌 독자의 말</h3>
+                    <p class="reader-section-desc">웹툰 작가들의 건강한 창작 환경을 응원하는 한마디를 포스트잇으로 남겨주세요.</p>
+                    
+                    <!-- 방명록 작성 폼 -->
+                    <form id="reader-message-form" class="reader-form-box">
+                        <div class="form-inputs">
+                            <textarea id="reader-text" placeholder="작가님들을 향한 따뜻한 응원의 메시지를 남겨주세요 (최대 80자)" maxlength="80" required></textarea>
+                        </div>
+                        <div class="form-controls" style="justify-content: flex-end;">
+                            <button type="submit" class="submit-btn">포스트잇 붙이기 📌</button>
+                        </div>
+                    </form>
+
+                    <!-- 방명록 포스트잇 보드 -->
+                    <div id="reader-messages-board" class="reader-board">
+                        <!-- JS를 통해 동적으로 로드 및 추가됩니다 -->
+                    </div>
+                </div>
+
                 <!-- 하단 캐릭터 3인방 배치 -->
                 <div class="guide-chars-row">
                     <!-- 학생 -->
@@ -1025,6 +1046,9 @@
         </footer>
     </section>
 
+    <!-- Firebase SDK (Compat 버전으로 ES 모듈 없이 일반 스크립트로 동작) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="app.js"></script>
 </body>
 

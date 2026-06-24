@@ -143,6 +143,7 @@ h4,
     height: 100%;
     z-index: 1;
     pointer-events: none;
+    opacity: 50%;
 }
 
 .halftone-pattern {
@@ -3716,6 +3717,15 @@ h4,
         margin-bottom: 0 !important;
     }
 
+    .advice-postit p {
+        font-size: 0.98rem !important;
+        line-height: 1.6 !important;
+    }
+
+    .postit-source {
+        font-size: 0.75rem !important;
+    }
+
     .outro-advice-section.animate-active .postit-pro,
     .outro-advice-section.animate-active .postit-friend {
         transform: translateY(0) rotate(0deg) scale(1) !important;
@@ -4000,5 +4010,355 @@ h4,
 
     .contract-partner-stats.animate-active {
         transition-delay: 1.8s !important;
+    }
+}
+
+/* --- Scene 9 Additions: Reader's Messages (Guestbook) --- */
+.reader-messages-section {
+    width: 100%;
+    max-width: 950px;
+    margin: 6rem auto 4rem;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+}
+
+.reader-section-desc {
+    text-align: center;
+    color: #444;
+    font-size: 1.05rem;
+    margin-bottom: 2.5rem;
+    font-family: 'NanumSquare', sans-serif;
+    word-break: keep-all;
+}
+
+/* Guestbook Form Styling */
+.reader-form-box {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    padding: 1.8rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    backdrop-filter: blur(10px);
+    margin: 0 auto 3.5rem;
+    max-width: 680px;
+    box-sizing: border-box;
+}
+
+.reader-form-box .form-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+}
+
+.reader-form-box input[type="text"] {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: 'NanumSquare', sans-serif;
+    background: #ffffff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.reader-form-box textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: 'NanumSquare', sans-serif;
+    background: #ffffff;
+    resize: none;
+    height: 90px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.reader-form-box input[type="text"]:focus,
+.reader-form-box textarea:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(255, 138, 0, 0.15);
+}
+
+.reader-form-box .form-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+}
+
+.reader-form-box .color-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.reader-form-box .color-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #555;
+    font-family: 'NanumSquare', sans-serif;
+}
+
+.reader-form-box .color-options {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.reader-form-box .color-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+    outline: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.reader-form-box .color-btn:hover {
+    transform: scale(1.2);
+}
+
+.reader-form-box .color-btn.active {
+    border-color: #333;
+    transform: scale(1.1);
+}
+
+/* 4 Post-it Colors */
+.reader-form-box .btn-yellow { background: #FEF9E7; }
+.reader-form-box .btn-blue { background: #EAF2F8; }
+.reader-form-box .btn-green { background: #EAFAF1; }
+.reader-form-box .btn-pink { background: #FDEDEC; }
+
+.reader-form-box .submit-btn {
+    padding: 0.8rem 1.6rem;
+    background: var(--accent-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    font-family: 'NanumSquare', sans-serif;
+    box-shadow: 0 4px 10px rgba(255, 138, 0, 0.2);
+}
+
+.reader-form-box .submit-btn:hover {
+    background: #e07b00;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 138, 0, 0.3);
+}
+
+.reader-form-box .submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Post-it Board Styling */
+.reader-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 2.5rem;
+    justify-content: center;
+    align-items: start;
+    margin-top: 3rem;
+}
+
+/* Reader Post-it Card Styling (Smaller than Author's) */
+.reader-postit {
+    padding: 1.4rem 1.2rem 1.2rem;
+    box-shadow: 2px 6px 14px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+    position: relative;
+    border-radius: 4px;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, z-index 0s;
+    box-sizing: border-box;
+    animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.reader-postit:hover {
+    transform: scale(1.05) rotate(0deg) !important;
+    box-shadow: 4px 12px 22px rgba(0, 0, 0, 0.14) !important;
+    z-index: 10;
+}
+
+/* Tape decoration at top center of each mini post-it */
+.reader-postit::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-1deg);
+    width: 60px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+    backdrop-filter: blur(0.5px);
+    border-left: 1px dashed rgba(0, 0, 0, 0.06);
+    border-right: 1px dashed rgba(0, 0, 0, 0.06);
+    z-index: 2;
+}
+
+/* Post-it colors */
+.reader-postit.bg-yellow { background: #FEF9E7; }
+.reader-postit.bg-blue { background: #EAF2F8; }
+.reader-postit.bg-green { background: #EAFAF1; }
+.reader-postit.bg-pink { background: #FDEDEC; }
+
+/* Header of post-it (Nickname + Delete button) */
+.reader-postit .postit-header {
+    font-family: 'NanumSquare', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: #222;
+    margin-bottom: 0.6rem;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+    padding-bottom: 0.3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reader-postit p {
+    font-family: 'BelovedMyoeunttobak', 'NanumSquare', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #444;
+    margin: 0;
+    word-break: keep-all;
+}
+
+.reader-postit .postit-date {
+    font-size: 0.75rem;
+    color: #888;
+    text-align: right;
+    margin-top: auto;
+    padding-top: 0.8rem;
+    font-family: 'NanumSquare', sans-serif;
+    font-weight: 700;
+    opacity: 0.8;
+}
+
+/* Delete Button on Post-it */
+.reader-postit .delete-btn {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #888;
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px 4px;
+    transition: color 0.2s, opacity 0.2s;
+    opacity: 0;
+    z-index: 5;
+}
+
+.reader-postit:hover .delete-btn {
+    opacity: 0.7;
+}
+
+.reader-postit .delete-btn:hover {
+    color: #E74C3C;
+    opacity: 1;
+}
+
+/* Pop-in animation */
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.7) translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Responsive Overrides for Reader Messages */
+@media (max-width: 768px) {
+    .reader-messages-section {
+        margin-top: 4rem;
+        padding: 0 1rem;
+    }
+    
+    .reader-section-desc {
+        font-size: 0.95rem;
+        margin-bottom: 1.8rem;
+    }
+    
+    .reader-form-box {
+        padding: 1.2rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .reader-form-box textarea {
+        height: 75px;
+    }
+    
+    .reader-form-box .form-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+    
+    .reader-form-box .color-selector {
+        justify-content: space-between;
+    }
+    
+    .reader-form-box .submit-btn {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .reader-board {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+        margin-top: 2rem;
+    }
+    
+    .reader-postit {
+        min-height: auto;
+        padding: 1.2rem 1rem;
+    }
+    
+    .reader-postit::before {
+        width: 45px;
+        height: 16px;
+        top: -8px;
+    }
+    
+    .reader-postit .postit-header {
+        font-size: 0.8rem;
+        margin-bottom: 0.4rem;
+    }
+    
+    .reader-postit p {
+        font-size: 0.92rem;
+        line-height: 1.45;
+    }
+    
+    .reader-postit .postit-date {
+        font-size: 0.7rem;
+        padding-top: 0.5rem;
+    }
+    
+    /* Make delete button always visible on mobile since there is no hover */
+    .reader-postit .delete-btn {
+        opacity: 0.5;
+        font-size: 1rem;
+        padding: 2px;
     }
 }

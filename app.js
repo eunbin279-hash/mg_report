@@ -907,4 +907,286 @@ document.addEventListener('DOMContentLoaded', () => {
     // Register all elements to observe
     const animatedElements = document.querySelectorAll('.init-fade-in, .split-ratio-bar-wrapper');
     animatedElements.forEach(el => statsObserver.observe(el));
+
+    /* --- 독자의 말 방명록 기능 로직 (Firebase 실시간 연동 & LocalStorage 하이브리드) --- */
+    const readerForm = document.getElementById('reader-message-form');
+    const readerBoard = document.getElementById('reader-messages-board');
+    let shouldScrollToBottom = false;
+
+    // 0. Firebase 설정 구성 (실제 프로젝트 정보 반영)
+    const firebaseConfig = {
+        apiKey: "AIzaSyD_7lSjiBoa3_2V-NUN1DRXuHSN8z_JN5c",
+        authDomain: "mg-report-73b8b.firebaseapp.com",
+        projectId: "mg-report-73b8b",
+        storageBucket: "mg-report-73b8b.firebasestorage.app",
+        messagingSenderId: "249706637754",
+        appId: "1:249706637754:web:2119883593440a19b05583"
+    };
+
+    let db = null;
+    let isFirebaseActive = false;
+
+    // Firebase 설정 검증 및 초기화 (Compat CDN 연동 대응)
+    if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "YOUR_API_KEY_HERE" && typeof firebase !== "undefined") {
+        try {
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore();
+            isFirebaseActive = true;
+            console.log("Firebase Firestore가 활성화되었습니다. 실시간 클라우드 DB 모드로 작동합니다.");
+        } catch (e) {
+            console.error("Firebase 초기화 에러로 로컬스토리지 모드로 작동합니다:", e);
+        }
+    } else {
+        console.warn("Firebase 설정이 비어있어 데모 버전(LocalStorage)으로 작동합니다. app.js 상단의 firebaseConfig를 입력해 주세요.");
+    }
+
+    // 1. 더미 데이터 삭제 (빈 배열)
+    const seedMessages = [];
+
+    // 2. LocalStorage 유틸리티
+    const getStoredMessages = () => {
+        const stored = localStorage.getItem('reader_messages');
+        if (!stored) {
+            localStorage.setItem('reader_messages', JSON.stringify([]));
+            return [];
+        }
+        try {
+            return JSON.parse(stored);
+        } catch (e) {
+            return [];
+        }
+    };
+
+    const saveMessages = (messages) => {
+        localStorage.setItem('reader_messages', JSON.stringify(messages));
+    };
+
+    // 내 세션에서 작성한 글의 ID 목록 관리 (삭제 권한 제어용)
+    const getMyWrittenMessages = () => {
+        try {
+            const stored = localStorage.getItem('my_written_messages');
+            return stored ? JSON.parse(stored) : [];
+        } catch (e) {
+            return [];
+        }
+    };
+
+    const addMyWrittenMessage = (id) => {
+        try {
+            const list = getMyWrittenMessages();
+            list.push(id);
+            localStorage.setItem('my_written_messages', JSON.stringify(list));
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    // 3. HTML 이스케이프 유틸리티
+    const escapeHTML = (str) => {
+        return str.replace(/[&<>'"]/g, 
+            tag => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            }[tag] || tag)
+        );
+    };
+
+    // 4. 포스트잇 생성 함수 (닉네임 제거, 기본 노란색 포스트잇 사용, 내 글에만 삭제 노출)
+    const createPostitElement = (msg, myWrittenList) => {
+        const postit = document.createElement('div');
+        const color = msg.color || 'yellow';
+        postit.className = `reader-postit bg-${color}`;
+        postit.setAttribute('data-id', msg.id);
+        
+        const rotation = msg.rotate !== undefined ? msg.rotate : (Math.random() * 6 - 3).toFixed(1);
+        postit.style.transform = `rotate(${rotation}deg)`;
+        
+        // 내 세션에서 작성한 글인 경우에만 삭제 허용
+        const isMyMessage = myWrittenList.includes(msg.id);
+        
+        postit.innerHTML = `
+            ${isMyMessage ? `<button type="button" class="delete-btn" aria-label="삭제">&times;</button>` : ''}
+            <p style="margin-top: 0.5rem;">${escapeHTML(msg.text)}</p>
+            <div class="postit-date">${msg.date}</div>
+        `;
+
+        if (isMyMessage) {
+            const deleteBtn = postit.querySelector('.delete-btn');
+            if (deleteBtn) {
+                deleteBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (confirm('이 응원의 포스트잇을 떼어내시겠습니까?')) {
+                        deleteMessage(msg.id, postit);
+                    }
+                });
+            }
+        }
+
+        return postit;
+    };
+
+    // 5. 메시지 삭제 함수
+    const deleteMessage = (id, postitEl) => {
+        // 소멸 애니메이션 트리거
+        postitEl.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
+        postitEl.style.transform = 'scale(0.5) translateY(30px) rotate(0deg)';
+        postitEl.style.opacity = '0';
+        
+        setTimeout(async () => {
+            if (isFirebaseActive && db) {
+                try {
+                    await db.collection('reader_messages').doc(id).delete();
+                } catch (e) {
+                    console.error("Firestore 삭제 에러:", e);
+                    alert("데이터베이스에서 삭제하는 중 오류가 발생했습니다.");
+                    initMessagesListener(); // 복구
+                }
+            } else {
+                let messages = getStoredMessages();
+                messages = messages.filter(m => m.id !== id);
+                saveMessages(messages);
+                postitEl.remove();
+            }
+        }, 400);
+    };
+
+    // 6. 데이터 렌더링 함수
+    const renderBoardFromData = (messages) => {
+        if (!readerBoard) return;
+        readerBoard.innerHTML = '';
+        const myWrittenList = getMyWrittenMessages();
+        
+        messages.forEach(msg => {
+            const el = createPostitElement(msg, myWrittenList);
+            readerBoard.appendChild(el);
+        });
+
+        // 사용자가 방금 포스트잇을 붙인 경우, 맨 아래로 부드럽게 스크롤 포커스
+        if (shouldScrollToBottom) {
+            const lastPostit = readerBoard.lastElementChild;
+            if (lastPostit) {
+                setTimeout(() => {
+                    lastPostit.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            }
+            shouldScrollToBottom = false;
+        }
+    };
+
+    // 7. 실시간 리스너 및 동기화 초기화 (더미데이터 시딩 제거)
+    let unsubscribeFirestore = null;
+
+    const initMessagesListener = () => {
+        if (isFirebaseActive && db) {
+            unsubscribeFirestore = db.collection('reader_messages')
+                .orderBy('createdAt', 'asc')
+                .onSnapshot((snapshot) => {
+                    const messages = [];
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        messages.push({
+                            id: doc.id,
+                            text: data.text,
+                            color: data.color || 'yellow',
+                            date: data.date,
+                            rotate: data.rotate
+                        });
+                    });
+                    
+                    renderBoardFromData(messages);
+                }, (error) => {
+                    console.error("Firestore 실시간 동기화 에러:", error);
+                    isFirebaseActive = false;
+                    renderMessagesLocalStorage();
+                });
+        } else {
+            renderMessagesLocalStorage();
+        }
+    };
+
+    const renderMessagesLocalStorage = () => {
+        const messages = getStoredMessages();
+        renderBoardFromData(messages);
+    };
+
+    // 8. 방명록 등록 이벤트 헨들러 (닉네임, 컬러 선택 제거)
+    if (readerForm) {
+        readerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const textInput = document.getElementById('reader-text');
+            if (!textInput) return;
+            
+            const text = textInput.value.trim();
+            if (!text) return;
+            
+            // 현재 날짜 (YYYY.MM.DD)
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const date = String(today.getDate()).padStart(2, '0');
+            const dateString = `${year}.${month}.${date}`;
+            
+            const randomRotation = (Math.random() * 6 - 3).toFixed(1);
+            
+            if (isFirebaseActive && db) {
+                try {
+                    const submitBtn = readerForm.querySelector('.submit-btn');
+                    submitBtn.disabled = true;
+                    submitBtn.innerText = "붙이는 중... ⏳";
+                    
+                    shouldScrollToBottom = true;
+                    
+                    const docRef = await db.collection('reader_messages').add({
+                        text: text,
+                        color: 'yellow',
+                        date: dateString,
+                        rotate: parseFloat(randomRotation),
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    
+                    addMyWrittenMessage(docRef.id);
+                    
+                    textInput.value = '';
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "포스트잇 붙이기 📌";
+                } catch (e) {
+                    console.error("Firestore 저장 에러:", e);
+                    alert("메시지 등록 중 에러가 발생했습니다.");
+                    const submitBtn = readerForm.querySelector('.submit-btn');
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "포스트잇 붙이기 📌";
+                }
+            } else {
+                const newId = 'msg-' + Date.now();
+                const newMsg = {
+                    id: newId,
+                    text: text,
+                    color: 'yellow',
+                    date: dateString,
+                    rotate: parseFloat(randomRotation)
+                };
+                
+                const messages = getStoredMessages();
+                messages.push(newMsg);
+                saveMessages(messages);
+                addMyWrittenMessage(newId);
+                
+                renderMessagesLocalStorage();
+                
+                const newEl = readerBoard.querySelector(`[data-id="${newId}"]`);
+                if (newEl) {
+                    newEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+                
+                textInput.value = '';
+            }
+        });
+    }
+
+    // 9. 리스너 연동 구동
+    initMessagesListener();
 });
