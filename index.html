@@ -40,54 +40,17 @@
 
     <!-- Scene 1 -->
     <section id="scene-1" class="scene intro-scene">
-        <!-- 핑크 배경 그래픽 (coin_dp.svg) -->
-        <div class="intro-bg-graphics">
-            <!-- 코인 (전체 화면 배치) -->
-            <img src="assets/coin_dp.svg" alt="코인 그래픽" class="bg-deco deco-coin-full">
+        <!-- 배경 하프톤 패턴 -->
+        <div class="intro-halftone-bg">
+            <img src="assets/intro_halftone.svg" alt="" class="halftone-pattern">
         </div>
 
         <div class="content-wrapper intro-content">
-
-
-            <!-- 민트 박스 부제 -->
-            <div class="intro-subtitle-box">
-                <p>웹툰 정산 제도의 정보 불균형 해결을 위한 인터랙티브 저널</p>
-            </div>
-
-            <div class="intro-title-wrapper">
-                <h1 class="main-title typography-title" id="intro-title">
-                    <div class="title-row row-1">
-                        <span class="char" style="--char-index: 1;">웹</span>
-                        <span class="char" style="--char-index: 2;">툰</span>
-                        <span class="char" style="--char-index: 3;">작</span>
-                        <span class="char" style="--char-index: 4;">가</span>
-                        <span class="char" style="--char-index: 5;">는</span>
-                    </div>
-                    <div class="title-row row-2">
-                        <span class="title-sub-row">
-                            <span class="char" style="--char-index: 6;">1</span>
-                            <span class="char" style="--char-index: 7;">년</span>
-                            <span class="char" style="--char-index: 8;">에</span>
-                        </span>
-                        <span class="char-space"></span>
-                        <span class="title-sub-row">
-                            <span class="char" style="--char-index: 9;">얼</span>
-                            <span class="char" style="--char-index: 10;">마</span>
-                        </span>
-                        <span class="char-space"></span>
-                        <span class="title-sub-row">
-                            <span class="char" style="--char-index: 11;">벌</span>
-                            <span class="char" style="--char-index: 12;">까</span>
-                            <span class="char" style="--char-index: 13;">?</span>
-                        </span>
-                    </div>
-                </h1>
-            </div>
-
-            <!-- 하단 제작 정보 -->
-            <div class="intro-credit">
-                <p class="intro-credit-label">Designed by 노은빈</p>
-                <p class="intro-credit-year">2026.</p>
+            <!-- 부제, 제목, 크레딧이 동일한 뷰박스(viewBox)로 디자인되어 있으므로 캔버스 형태로 겹쳐서 배치 -->
+            <div class="intro-canvas-container">
+                <img src="assets/intro_subtitle.svg" alt="웹툰 정산 제도의 정보 불균형 해결을 위한 인터랙티브 저널" class="intro-subtitle-img">
+                <img src="assets/intro_title.svg" alt="웹툰작가는 1년에 얼마벌까?" class="intro-title-img">
+                <img src="assets/intro_credit.svg" alt="제작 노은빈" class="intro-credit-img">
             </div>
 
             <div class="scroll-indicator intro-scroll">스크롤해서 알아보기</div>
