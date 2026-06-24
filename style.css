@@ -131,7 +131,8 @@ h4,
     position: relative;
     overflow: hidden;
     height: 100vh;
-    padding: 0 !important; /* Remove inherited padding to prevent content from pushing down */
+    padding: 0 !important;
+    /* Remove inherited padding to prevent content from pushing down */
 }
 
 .intro-halftone-bg {
@@ -381,6 +382,7 @@ h4,
         opacity: 0;
         transform: scale(0.3);
     }
+
     100% {
         opacity: 1;
         transform: scale(1);
@@ -391,19 +393,22 @@ h4,
 #scene-1.active .intro-title-img {
     animation: ddiyongPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     animation-delay: 0.4s;
-    transform-origin: center center; /* Scale from center of title */
+    transform-origin: center center;
+    /* Scale from center of title */
 }
 
 #scene-1.active .intro-subtitle-img {
     animation: ddiyongPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     animation-delay: 0.9s;
-    transform-origin: center 15%; /* Scale from center of subtitle */
+    transform-origin: center 15%;
+    /* Scale from center of subtitle */
 }
 
 #scene-1.active .intro-credit-img {
     animation: ddiyongPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     animation-delay: 1.4s;
-    transform-origin: center 85%; /* Scale from center of credit */
+    transform-origin: center 85%;
+    /* Scale from center of credit */
 }
 
 /* 스크롤 가이드 스타일 */
@@ -430,29 +435,36 @@ h4,
 }
 
 @keyframes bouncySpring {
+
     0%,
     100% {
         transform: translateX(-50%) translateY(0);
     }
+
     30% {
         transform: translateX(-50%) translateY(-14px);
     }
+
     50% {
         transform: translateX(-50%) translateY(4px);
     }
+
     70% {
         transform: translateX(-50%) translateY(-6px);
     }
+
     85% {
         transform: translateX(-50%) translateY(2px);
     }
 }
 
 @keyframes pulse {
+
     0%,
     100% {
         opacity: 0.4;
     }
+
     50% {
         opacity: 1;
     }
@@ -3568,19 +3580,54 @@ h4,
         font-size: 0.85rem !important;
     }
 
-        /* Mobile for Scene 1 Intro (redesigned SVG stack) */
-        .intro-content {
-            padding: 0 1.5rem;
+    /* Mobile for Scene 1 Intro (redesigned SVG stack) */
+    .intro-content {
+        padding: 0 1.5rem;
+    }
+
+    .intro-canvas-container {
+        width: 140%;
+        max-width: 580px;
+        margin-left: -20%;
+        margin-right: -20%;
+        flex-shrink: 0;
+    }
+
+    /* Increase vertical gaps between elements on mobile by shifting top/bottom elements */
+    .intro-subtitle-img {
+        top: -6% !important;
+    }
+
+    .intro-credit-img {
+        top: 6% !important;
+    }
+
+    /* Define a new keyframe for scaled-up elements on mobile */
+    @keyframes ddiyongPopMobileSubCredit {
+        0% {
+            opacity: 0;
+            transform: scale(0.3);
         }
 
-        .intro-canvas-container {
-            width: 95%;
-            max-width: 480px;
+        100% {
+            opacity: 1;
+            transform: scale(1.21);
+            /* Make them 18% larger on mobile */
         }
+    }
 
-        #scene-1.active .scroll-indicator {
-            animation-delay: 2.2s; /* speed up scroll indicator for mobile */
-        }
+    #scene-1.active .intro-subtitle-img {
+        animation-name: ddiyongPopMobileSubCredit;
+    }
+
+    #scene-1.active .intro-credit-img {
+        animation-name: ddiyongPopMobileSubCredit;
+    }
+
+    #scene-1.active .scroll-indicator {
+        animation-delay: 2.2s;
+        /* speed up scroll indicator for mobile */
+    }
 
     /* Outro Scene Mobile Additions */
     .scene8-sub-title {
